@@ -11,5 +11,15 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Congregation extends Model
 {
-    
+    // Relationships.
+
+    public function speakers()
+    {
+        return $this->hasMany('App\Speaker');
+    }
+
+    public function scheduledTalks()
+    {
+        return $this->hasMany('App\ScheduledTalk');
+    }
 }

@@ -11,5 +11,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Talk extends Model
 {
-    //
+    // Relationships.
+
+    public function subjects()
+    {
+        $this->hasMany('App\TalkSubject');
+    }
 }
