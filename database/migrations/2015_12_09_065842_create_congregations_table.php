@@ -17,6 +17,8 @@ class CreateCongregationsTable extends BaseMigration
         Schema::create('congregations', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->boolean('is_group');
+            $table->datetime('public_meeting_at');
             $this->common($table);
         });
 
