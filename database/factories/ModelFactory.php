@@ -1,21 +1,57 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Model Factories
-|--------------------------------------------------------------------------
-|
-| Here you may define all of your model factories. Model factories give
-| you a convenient way to create models for testing and seeding your
-| database. Just tell the factory how a default model should look.
-|
-*/
-
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     return [
-        'name' => $faker->name,
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
         'email' => $faker->email,
-        'password' => bcrypt(str_random(10)),
+        'password' => str_random(10),
         'remember_token' => str_random(10),
+    ];
+});
+
+$factory->define(App\Congregation::class, function (Faker\Generator $faker) {
+    return [
+        'name' => 'Congregation '.$faker->city(),
+        'is_group' => false,
+        'public_meeting_at' => $faker->dateTime(),
+    ];
+});
+
+$factory->define(App\Locale::class, function (Faker\Generator $faker) {
+    $languageCode = $faker->languageCode();
+
+    return [
+        'code' => $languageCode,
+        'name' => $languageCode,
+    ];
+});
+
+$factory->define(App\Speaker::class, function (Faker\Generator $faker) {
+    return [
+        'first_name' => $faker->firstName,
+        'last_name' => $faker->lastName,
+    ];
+});
+
+$factory->define(App\Talk::class, function (Faker\Generator $faker) {
+    return [
+        'number' => $faker->numberBetween(1, 200),
+    ];
+});
+
+$factory->define(App\TalkSubject::class, function (Faker\Generator $faker) {
+    return [
+        'subject' => $faker->sentence(8),
+    ];
+});
+
+$factory->define(App\ScheduledTalk::class, function (Faker\Generator $faker) {
+    $now = Carbon::now();
+    $from = Carbon::create($now->year, $now->month, 1, 0, 0, 0, null);
+    $to = $from->copy()->addMonth()->subSecond();
+
+    return [
+        'scheduled_at' => $faker->dateTimeBetween($from, $to),
     ];
 });
