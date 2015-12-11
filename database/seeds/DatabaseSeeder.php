@@ -3,18 +3,23 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * The DatabaseSeeder class.
+ *
+ * @author Rubens Mariuzzo <rubens@mariuzzo.com>
+ */
 class DatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.
-     *
-     * @return void
      */
     public function run()
     {
         Model::unguard();
 
-        // $this->call(UserTableSeeder::class);
+        $this->call(LocalesTableSeeder::class);
+        $this->call(UsersTableSeeder::class);
+        $this->call(TalksTableSeeder::class);
 
         Model::reguard();
     }

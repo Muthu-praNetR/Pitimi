@@ -27,4 +27,14 @@ class ScheduledTalk extends Model
     {
         return $this->belongsTo('App\PreparedTalk');
     }
+
+    public function createdBy()
+    {
+        return $this->belongsTo('App\User', 'created_by');
+    }
+
+    public function updatedBy()
+    {
+        return $this->belongsTo('App\User', 'updated_by');
+    }
 }

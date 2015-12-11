@@ -22,4 +22,14 @@ class Congregation extends Model
     {
         return $this->hasMany('App\ScheduledTalk');
     }
+
+    public function createdBy()
+    {
+        return $this->belongsTo('App\User', 'created_by');
+    }
+
+    public function updatedBy()
+    {
+        return $this->belongsTo('App\User', 'updated_by');
+    }
 }

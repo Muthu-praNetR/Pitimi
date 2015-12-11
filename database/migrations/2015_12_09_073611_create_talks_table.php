@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
 
 /**
  * The CreateTalksTable class.
@@ -29,6 +28,7 @@ class CreateTalksTable extends BaseMigration
             $table->integer('locale_id')->unsigned();
             $table->foreign('locale_id')->references('id')->on('locales');
             $table->unique(['talk_id', 'locale_id']);
+            $this->common($table);
         });
     }
 

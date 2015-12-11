@@ -18,7 +18,6 @@ class CreateLocalesTable extends BaseMigration
             $table->increments('id');
             $table->string('code', 10);
             $table->string('name', 50);
-            $this->common($table);
         });
 
         Schema::table('users', function (Blueprint $table) {
