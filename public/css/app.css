@@ -7832,4 +7832,32 @@ button.close {
 #login-page .panel {
   margin-top: 40px; }
 
+/**
+ * Calendar page.
+ *
+ * @author Rubens Mariuzzo <rubens@mariuzzo.com>
+ */
+#calendar-page .toolbar {
+  margin-bottom: 10px; }
+
+#calendar-page .btn.current {
+  width: 150px; }
+
+#calendar-page ul.calendar {
+  list-style-type: none;
+  margin: -5px;
+  padding: 0; }
+  #calendar-page ul.calendar > li {
+    float: left;
+    width: 14.2857142857%;
+    padding: 5px; }
+
+#calendar-page .day {
+  border: #ccc solid 1px;
+  padding: 10px; }
+  #calendar-page .day .date {
+    display: block; }
+  #calendar-page .day.not-in-month {
+    opacity: .5; }
+
 /*# sourceMappingURL=app.css.map */

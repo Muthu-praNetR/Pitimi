@@ -6,8 +6,6 @@ Route::get('logout', 'AuthController@logout');
 
 Route::group(['middleware' => 'auth'], function () {
 
-    Route::get('/', function () {
-        return view('calendar');
-    });
+    Route::get('/{year?}/{month?}', ['as' => 'calendar', 'uses' => 'CalendarController@calendar']);
 
 });
