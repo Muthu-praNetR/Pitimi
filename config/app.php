@@ -143,6 +143,7 @@ return [
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         App\Providers\EventServiceProvider::class,
+        App\Providers\ViewComposerProvider::class,
         App\Providers\RouteServiceProvider::class,
 
     ],

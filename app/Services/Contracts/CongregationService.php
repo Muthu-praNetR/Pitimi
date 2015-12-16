@@ -26,6 +26,11 @@ interface CongregationService
     public function authenticate($email, $password);
 
     /**
+     * Logout the current user.
+     */
+    public function logout();
+
+    /**
      * Create a speaker.
      *
      * @param Speaker $speaker The speaker.

@@ -41,6 +41,16 @@ class CongregationService implements Contracts\CongregationService
     }
 
     /**
+     * Logout the current user.
+     */
+    public function logout()
+    {
+        Log::debug('logout');
+
+        Auth::logout();
+    }
+
+    /**
      * Create a speaker.
      *
      * @param Speaker $speaker The speaker.

@@ -1,15 +1,13 @@
 <?php
 
-Route::get('login', function() {
-    return view('auth.login');
-});
-
-Route::post('login', 'AuthController@processLogin');
+Route::get('login', 'AuthController@loginForm');
+Route::post('login', 'AuthController@login');
+Route::get('logout', 'AuthController@logout');
 
 Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/', function () {
-        return view('welcome');
+        return view('calendar');
     });
 
 });

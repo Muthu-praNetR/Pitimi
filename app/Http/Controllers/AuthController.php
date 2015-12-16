@@ -35,13 +35,23 @@ class AuthController extends Controller
     # Actions.
 
     /**
-     * Authenticate a user.
+     * View the login form.
+     *
+     * @return View
+     */
+    public function loginForm()
+    {
+        return view('auth.login');
+    }
+
+    /**
+     * Login a user.
      *
      * @param Request $request The request.
      *
      * @return Response A response.
      */
-    public function processLogin(Request $request)
+    public function login(Request $request)
     {
         $email = $request->input('email');
         $password = $request->input('password');
@@ -49,6 +59,18 @@ class AuthController extends Controller
         if ($this->congregationService->authenticate($email, $password)) {
             return redirect('/');
         }
+
+        return redirect('/login');
+    }
+
+    /**
+     * Logout the user.
+     *
+     * @return Response A response.
+     */
+    public function logout()
+    {
+        $this->congregationService->logout();
 
         return redirect('/login');
     }
