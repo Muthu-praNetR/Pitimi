@@ -1,19 +1,21 @@
 <?php
 
-namespace App\Services\Contracts;
+namespace App\Services;
 
 use App\Speaker;
 use App\TalkSubject;
 use App\PreparedTalk;
 use App\ScheduledTalk;
+use Auth;
 use DateTime;
+use Log;
 
 /**
- * The CongregationService contract.
+ * The CongregationService class.
  *
  * @author Rubens Mariuzzo <rubens@mariuzzo.com>
  */
-interface CongregationService
+class CongregationService implements Contracts\CongregationService
 {
     /**
      * Authenticate a user.
@@ -23,7 +25,20 @@ interface CongregationService
      *
      * @return bool True if authentication is successful.
      */
-    public function authenticate($email, $password);
+    public function authenticate($email, $password)
+    {
+        Log::debug('authenticate', compact('email'));
+
+        $authenticated = Auth::attempt(['email' => $email, 'password' => $password]);
+
+        if ($authenticated) {
+            Log::debug('Authentication successful.', compact('email'));
+        } else {
+            Log::debug('Authentication failed.', compact('email'));
+        }
+
+        return $authenticated;
+    }
 
     /**
      * Create a speaker.
@@ -32,7 +47,10 @@ interface CongregationService
      *
      * @return Speaker The created speaker.
      */
-    public function createSpeaker(Speaker $speaker);
+    public function createSpeaker(Speaker $speaker)
+    {
+        // TODO Implement me.
+    }
 
     /**
      * Get a speaker by id.
@@ -41,7 +59,10 @@ interface CongregationService
      *
      * @return Speaker The speaker.
      */
-    public function getSpeaker($id);
+    public function getSpeaker($id)
+    {
+        // TODO Implement me.
+    }
 
     /**
      * Get speakers.
@@ -50,7 +71,10 @@ interface CongregationService
      *
      * @return array Array of speakers.
      */
-    public function getSpeakers($page_size);
+    public function getSpeakers($page_size)
+    {
+        // TODO Implement me.
+    }
 
     /**
      * Update a speaker.
@@ -59,14 +83,20 @@ interface CongregationService
      *
      * @return Speaker The updated speaker.
      */
-    public function updateSpeaker(Speaker $speaker);
+    public function updateSpeaker(Speaker $speaker)
+    {
+        // TODO Implement me.
+    }
 
     /**
      * Delete a speaker.
      *
      * @param Speaker $speaker The speaker.
      */
-    public function deleteSpeaker(Speaker $speaker);
+    public function deleteSpeaker(Speaker $speaker)
+    {
+        // TODO Implement me.
+    }
 
     /**
      * Create a prepared talk.
@@ -76,14 +106,20 @@ interface CongregationService
      *
      * @return PreparedTalk The created prepared talk.
      */
-    public function createPreparedTalk(TalkSubject $talk_subject, Speaker $speaker);
+    public function createPreparedTalk(TalkSubject $talk_subject, Speaker $speaker)
+    {
+        // TODO Implement me.
+    }
 
     /**
      * Delete a prepared talk.
      *
      * @param PreparedTalk $prepared_talk The prepared talk.
      */
-    public function deletePreparedTalk(PreparedTalk $prepared_talk);
+    public function deletePreparedTalk(PreparedTalk $prepared_talk)
+    {
+        // TODO Implement me.
+    }
 
     /**
      * Schedule a talk.
@@ -94,14 +130,20 @@ interface CongregationService
      *
      * @return ScheduledTalk The scheduled talk.
      */
-    public function scheduleTalk(TalkSubject $talk_subject, Speaker $speaker, DateTime $date);
+    public function scheduleTalk(TalkSubject $talk_subject, Speaker $speaker, DateTime $date)
+    {
+        // TODO Implement me.
+    }
 
     /**
      * Unschedule a talk.
      *
      * @param ScheduledTalk $scheduled_talk The scheduled talk.
      */
-    public function unscheduleTalk(ScheduledTalk $scheduled_talk);
+    public function unscheduleTalk(ScheduledTalk $scheduled_talk)
+    {
+        // TODO Implement me.
+    }
 
     /**
      * View talks in a month.
@@ -110,5 +152,8 @@ interface CongregationService
      *
      * @return array Array of days.
      */
-    public function viewTalksInMonth(DateTime $date);
+    public function viewTalksInMonth(DateTime $date)
+    {
+        // TODO Implement me.
+    }
 }
