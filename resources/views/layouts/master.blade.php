@@ -9,19 +9,26 @@
 
 <body>
     @if (Auth::check())
-    <div class="container">
-        <nav>
-            <ul>
-            @foreach($menu as $item)
-            <li><a href="{{ $item['url'] }}">{{ $item['text'] }}</a></li>
-            @endforeach
+    <header class="container">
+        <div>
+            <h1>Pitimi
+                <small>Public Talk Manager</small>
+            </h1>
+        </div>
+        <nav class="navbar navbar-default">
+            <ul class="nav navbar-nav">
+                @foreach($menu as $item) @if($item['active'])
+                <li class="active"><a href="{{ $item['url'] }}">{{ $item['text'] }}</a></li>
+                @else
+                <li><a href="{{ $item['url'] }}">{{ $item['text'] }}</a></li>
+                @endif @endforeach
             </ul>
         </nav>
-    </div>
+    </header>
     @endif
-    <div class="container">
+    <main class="container">
         @yield('content')
-    </div>
+    </main>
 </body>
 
 </html>

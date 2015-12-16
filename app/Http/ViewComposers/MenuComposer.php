@@ -3,6 +3,7 @@
 namespace App\Http\ViewComposers;
 
 use Illuminate\Contracts\View\View;
+use Illuminate\Http\Request;
 
 /**
  * The MenuComposer class.
@@ -11,13 +12,18 @@ use Illuminate\Contracts\View\View;
  */
 class MenuComposer
 {
+    # Properties.
+
+    protected $request;
+
     # Constructor.
 
     /**
      * Create a new menu composer.
      */
-    public function __construct()
+    public function __construct(Request $request)
     {
+        $this->request = $request;
     }
 
     # Methods.
@@ -29,12 +35,14 @@ class MenuComposer
      */
     public function compose(View $view)
     {
-        $view->with('menu', [
-            ['text' => 'Calendar', 'url' => url('/')],
-            ['text' => 'Speakers', 'url' => url('/speakers')],
-            ['text' => 'Talks',    'url' => url('/talks')],
-            ['text' => 'Users',    'url' => url('/users')],
-            ['text' => 'Logout',   'url' => url('/logout')],
-        ]);
+        $menu = [
+            ['text' => 'Calendar', 'url' => url('/'),         'active' => $this->request->is('/')],
+            ['text' => 'Speakers', 'url' => url('/speakers'), 'active' => $this->request->is('/speaker*')],
+            ['text' => 'Talks',    'url' => url('/talks'),    'active' => $this->request->is('/talk*')],
+            ['text' => 'Users',    'url' => url('/users'),    'active' => $this->request->is('/user*')],
+            ['text' => 'Logout',   'url' => url('/logout'),   'active' => $this->request->is('/logout*')],
+        ];
+
+        $view->with('menu', $menu);
     }
 }
