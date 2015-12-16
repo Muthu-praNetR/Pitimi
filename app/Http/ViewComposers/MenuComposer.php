@@ -36,11 +36,36 @@ class MenuComposer
     public function compose(View $view)
     {
         $menu = [
-            ['text' => 'Calendar', 'url' => url('/'),         'active' => $this->request->is('/')],
-            ['text' => 'Speakers', 'url' => url('/speakers'), 'active' => $this->request->is('/speaker*')],
-            ['text' => 'Talks',    'url' => url('/talks'),    'active' => $this->request->is('/talk*')],
-            ['text' => 'Users',    'url' => url('/users'),    'active' => $this->request->is('/user*')],
-            ['text' => 'Logout',   'url' => url('/logout'),   'active' => $this->request->is('/logout*')],
+            [
+                'text' => 'Calendar',
+                'icon' => 'calendar',
+                'url' => url('/'),
+                'active' => $this->request->is('/'),
+            ],
+            [
+                'text' => 'Speakers',
+                'icon' => 'user',
+                'url' => url('/speakers'),
+                'active' => $this->request->is('/speaker*'),
+            ],
+            [
+                'text' => 'Talks',
+                'icon' => 'file-text-o',
+                'url' => url('/talks'),
+                'active' => $this->request->is('/talk*'),
+            ],
+            [
+                'text' => 'Users',
+                'icon' => 'cog',
+                'url' => url('/users'),
+                'active' => $this->request->is('/user*'),
+            ],
+            [
+                'text' => 'Logout',
+                'icon' => 'sign-out',
+                'url' => url('/logout'),
+                'active' => $this->request->is('/logout*'),
+            ],
         ];
 
         $view->with('menu', $menu);

@@ -4,5 +4,8 @@
 @section('title', 'Calendar')
 
 @section('content')
-    <h1>Calendar</h1>
+    <h2>
+        <i class="fa fa-calendar"></i>
+        Calendar
+    </h2>
 @endsection

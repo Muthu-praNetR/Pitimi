@@ -11,16 +11,27 @@
     @if (Auth::check())
     <header class="container">
         <div>
-            <h1>Pitimi
+            <h1>
+                <i class="fa fa-cube"></i> Pitimi
                 <small>Public Talk Manager</small>
             </h1>
         </div>
         <nav class="navbar navbar-default">
             <ul class="nav navbar-nav">
                 @foreach($menu as $item) @if($item['active'])
-                <li class="active"><a href="{{ $item['url'] }}">{{ $item['text'] }}</a></li>
+                <li class="active">
+                    <a href="{{ $item['url'] }}">
+                        <i class="fa fa-{{ $item['icon'] }}"></i>
+                        {{ $item['text'] }}
+                    </a>
+                </li>
                 @else
-                <li><a href="{{ $item['url'] }}">{{ $item['text'] }}</a></li>
+                <li>
+                    <a href="{{ $item['url'] }}">
+                        <i class="fa fa-{{ $item['icon'] }}"></i>
+                        {{ $item['text'] }}
+                    </a>
+                </li>
                 @endif @endforeach
             </ul>
         </nav>
