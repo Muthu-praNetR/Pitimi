@@ -20,6 +20,7 @@ class MenuComposer
 
     /**
      * Create a new menu composer.
+     * @param Request $request
      */
     public function __construct(Request $request)
     {
@@ -35,36 +36,32 @@ class MenuComposer
      */
     public function compose(View $view)
     {
+        $route_name = $this->request->route()->getName();
+
         $menu = [
             [
                 'text' => 'Calendar',
                 'icon' => 'calendar',
                 'url' => url('/'),
-                'active' => $this->request->is('/'),
+                'active' => $route_name === 'calendar',
             ],
             [
                 'text' => 'Speakers',
                 'icon' => 'user',
                 'url' => url('/speakers'),
-                'active' => $this->request->is('/speaker*'),
+                'active' => $this->request->is('speaker*'),
             ],
             [
                 'text' => 'Talks',
                 'icon' => 'file-text-o',
                 'url' => url('/talks'),
-                'active' => $this->request->is('/talk*'),
+                'active' => $this->request->is('talk*'),
             ],
             [
                 'text' => 'Users',
                 'icon' => 'cog',
                 'url' => url('/users'),
-                'active' => $this->request->is('/user*'),
-            ],
-            [
-                'text' => 'Logout',
-                'icon' => 'sign-out',
-                'url' => url('/logout'),
-                'active' => $this->request->is('/logout*'),
+                'active' => $this->request->is('user*'),
             ],
         ];
 

@@ -1,8 +1,9 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use App\User;
+use App\Congregation;
 use App\Locale;
+use App\User;
+use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
 {
@@ -19,5 +20,15 @@ class UsersTableSeeder extends Seeder
         $user->password = Hash::make('password');
         $user->locale()->associate(Locale::where('code', 'en')->first());
         $user->save();
+
+        DB::table('congregations')->delete();
+        $congregation = factory(Congregation::class)->make();
+        $congregation->created_by = $user->id;
+        $congregation->updated_by = $user->id;
+        $congregation->save();
+
+        $user->congregations()->attach($congregation);
+        $user->save();
+
     }
 }

@@ -2,10 +2,10 @@
 
 namespace App\Services\Contracts;
 
-use App\Speaker;
-use App\TalkSubject;
 use App\PreparedTalk;
 use App\ScheduledTalk;
+use App\Speaker;
+use App\TalkSubject;
 use DateTime;
 
 /**
@@ -18,7 +18,7 @@ interface CongregationService
     /**
      * Authenticate a user.
      *
-     * @param string $email    The email.
+     * @param string $email The email.
      * @param string $password The password.
      *
      * @return bool True if authentication is successful.
@@ -77,7 +77,7 @@ interface CongregationService
      * Create a prepared talk.
      *
      * @param TalkSubject $talk_subject The talk subject.
-     * @param Speaker     $speaker      The speaker.
+     * @param Speaker $speaker The speaker.
      *
      * @return PreparedTalk The created prepared talk.
      */
@@ -94,8 +94,8 @@ interface CongregationService
      * Schedule a talk.
      *
      * @param TalkSubject $talk_subject The talk subject.
-     * @param Speaker     $speaker      The speaker.
-     * @param DateTime    $date         The date and time.
+     * @param Speaker $speaker The speaker.
+     * @param DateTime $date The date and time.
      *
      * @return ScheduledTalk The scheduled talk.
      */

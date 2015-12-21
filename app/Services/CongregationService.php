@@ -2,10 +2,10 @@
 
 namespace App\Services;
 
-use App\Speaker;
-use App\TalkSubject;
 use App\PreparedTalk;
 use App\ScheduledTalk;
+use App\Speaker;
+use App\TalkSubject;
 use Auth;
 use DateTime;
 use Log;
@@ -20,7 +20,7 @@ class CongregationService implements Contracts\CongregationService
     /**
      * Authenticate a user.
      *
-     * @param string $email    The email.
+     * @param string $email The email.
      * @param string $password The password.
      *
      * @return bool True if authentication is successful.
@@ -59,7 +59,12 @@ class CongregationService implements Contracts\CongregationService
      */
     public function createSpeaker(Speaker $speaker)
     {
-        // TODO Implement me.
+        $user = Auth::user();
+        $speaker->congregation()->associate($user->congregations->first());
+        $speaker->createdBy()->associate($user);
+        $speaker->updatedBy()->associate($user);
+        $speaker->save();
+        return $speaker;
     }
 
     /**
@@ -71,19 +76,18 @@ class CongregationService implements Contracts\CongregationService
      */
     public function getSpeaker($id)
     {
-        // TODO Implement me.
+        return Speaker::findOrFail($id);
     }
 
     /**
      * Get speakers.
      *
-     * @param number $page_size The page size.
-     *
+     * @param int|number $page_size The page size.
      * @return array Array of speakers.
      */
-    public function getSpeakers($page_size)
+    public function getSpeakers($page_size = 10)
     {
-        // TODO Implement me.
+        return Speaker::paginate(10);
     }
 
     /**
@@ -95,7 +99,11 @@ class CongregationService implements Contracts\CongregationService
      */
     public function updateSpeaker(Speaker $speaker)
     {
-        // TODO Implement me.
+        $original = Speaker::findOrFail($speaker->id);
+        $original->first_name = $speaker->first_name;
+        $original->last_name = $speaker->last_name;
+        $original->updatedBy()->associate(Auth::user());
+        $original->save();
     }
 
     /**
@@ -112,7 +120,7 @@ class CongregationService implements Contracts\CongregationService
      * Create a prepared talk.
      *
      * @param TalkSubject $talk_subject The talk subject.
-     * @param Speaker     $speaker      The speaker.
+     * @param Speaker $speaker The speaker.
      *
      * @return PreparedTalk The created prepared talk.
      */
@@ -135,8 +143,8 @@ class CongregationService implements Contracts\CongregationService
      * Schedule a talk.
      *
      * @param TalkSubject $talk_subject The talk subject.
-     * @param Speaker     $speaker      The speaker.
-     * @param DateTime    $date         The date and time.
+     * @param Speaker $speaker The speaker.
+     * @param DateTime $date The date and time.
      *
      * @return ScheduledTalk The scheduled talk.
      */
