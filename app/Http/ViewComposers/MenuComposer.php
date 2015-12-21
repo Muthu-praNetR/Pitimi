@@ -2,6 +2,7 @@
 
 namespace App\Http\ViewComposers;
 
+use Auth;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
 
@@ -51,19 +52,24 @@ class MenuComposer
                 'url' => url('/speakers'),
                 'active' => $this->request->is('speaker*'),
             ],
-            [
-                'text' => 'Talks',
-                'icon' => 'file-text-o',
-                'url' => url('/talks'),
-                'active' => $this->request->is('talk*'),
-            ],
-            [
-                'text' => 'Users',
-                'icon' => 'cog',
-                'url' => url('/users'),
-                'active' => $this->request->is('user*'),
-            ],
         ];
+
+        if (Auth::check() && Auth::user()->is_admin) {
+            $menu = array_merge($menu, [
+                [
+                    'text' => 'Talks',
+                    'icon' => 'file-text-o',
+                    'url' => url('/talks'),
+                    'active' => $this->request->is('talk*'),
+                ],
+                [
+                    'text' => 'Users',
+                    'icon' => 'cog',
+                    'url' => url('/users'),
+                    'active' => $this->request->is('user*'),
+                ]
+            ]);
+        }
 
         $view->with('menu', $menu);
     }

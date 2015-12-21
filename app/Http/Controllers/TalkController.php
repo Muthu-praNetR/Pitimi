@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+/**
+ * Class TalkController
+ * @package App\Http\Controllers
+ */
 class TalkController extends Controller
 {
     public function getList()

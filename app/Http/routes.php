@@ -30,4 +30,17 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/{id}', ['uses' => 'UserController@getEdit', 'as' => 'edit-user']);
     Route::post('/user/{id}', ['uses' => 'UserController@postEdit']);
 
+    Route::get('/schedule/{year?}/{month?}/{day?}', ['uses' => 'ScheduleController@getNew', 'as' => 'new-schedule'])
+        ->where([
+            'year' => '[0-9]+',
+            'month' => '[0-9]+',
+            'day' => '[0-9]+',
+        ]);
+    Route::post('/schedule/{year?}/{month?}/{day?}', ['uses' => 'ScheduleController@postNew'])
+        ->where([
+            'year' => '[0-9]+',
+            'month' => '[0-9]+',
+            'day' => '[0-9]+',
+        ]);
+
 });

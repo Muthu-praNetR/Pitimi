@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Database\Schema\Blueprint;
-use Illuminate\Database\Migrations\Migration;
 
 class CreateUsersTable extends BaseMigration
 {
@@ -18,6 +17,7 @@ class CreateUsersTable extends BaseMigration
             $table->string('last_name');
             $table->string('email')->unique();
             $table->string('password', 60);
+            $table->boolean('is_admin');
             $table->rememberToken();
             $table->softDeletes();
             $this->common($table, true);
