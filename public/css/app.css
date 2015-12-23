@@ -5536,11 +5536,11 @@ button.close {
   .carousel-indicators {
     bottom: 20px; } }
 
-.clearfix:before, .clearfix:after {
+.clearfix:before, #new-speaker-page ul.talks:before, .clearfix:after, #new-speaker-page ul.talks:after {
   content: " ";
   display: table; }
 
-.clearfix:after {
+.clearfix:after, #new-speaker-page ul.talks:after {
   clear: both; }
 
 .center-block {
@@ -7859,5 +7859,31 @@ button.close {
     display: block; }
   #calendar-page .day.not-in-month {
     opacity: .5; }
+
+/**
+ * New speaker page.
+ *
+ * @author Rubens Mariuzzo <rubens@mariuzzo.com>
+ */
+#new-speaker-page ul.talks {
+  list-style-type: none;
+  padding: 0;
+  margin: 0; }
+  #new-speaker-page ul.talks > li {
+    float: left;
+    width: 32px;
+    height: 32px;
+    border: #999 solid 1px;
+    line-height: 32px;
+    text-align: center;
+    margin: 0 5px 5px 0;
+    cursor: pointer;
+    border-radius: 6px; }
+    #new-speaker-page ul.talks > li:hover {
+      background-color: #eeeeee; }
+    #new-speaker-page ul.talks > li.selected {
+      background-color: #337ab7;
+      border-color: #337ab7;
+      color: #fff; }
 
 /*# sourceMappingURL=app.css.map */

@@ -66,6 +66,8 @@
 <main class="container">
     @yield('content')
 </main>
+<script src="{{ asset('js/vendors.js') }}"></script>
+@yield('script')
 </body>
 
 </html>

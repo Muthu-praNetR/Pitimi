@@ -7,10 +7,10 @@ use App\ScheduledTalk;
 use App\Speaker;
 use App\TalkSubject;
 use DateTime;
+use Illuminate\Support\Collection;
 
 /**
  * The CongregationService contract.
- *
  * @author Rubens Mariuzzo <rubens@mariuzzo.com>
  */
 interface CongregationService
@@ -18,7 +18,7 @@ interface CongregationService
     /**
      * Authenticate a user.
      *
-     * @param string $email The email.
+     * @param string $email    The email.
      * @param string $password The password.
      *
      * @return bool True if authentication is successful.
@@ -77,7 +77,7 @@ interface CongregationService
      * Create a prepared talk.
      *
      * @param TalkSubject $talk_subject The talk subject.
-     * @param Speaker $speaker The speaker.
+     * @param Speaker     $speaker      The speaker.
      *
      * @return PreparedTalk The created prepared talk.
      */
@@ -94,8 +94,8 @@ interface CongregationService
      * Schedule a talk.
      *
      * @param TalkSubject $talk_subject The talk subject.
-     * @param Speaker $speaker The speaker.
-     * @param DateTime $date The date and time.
+     * @param Speaker     $speaker      The speaker.
+     * @param DateTime    $date         The date and time.
      *
      * @return ScheduledTalk The scheduled talk.
      */
@@ -116,4 +116,20 @@ interface CongregationService
      * @return array Array of days.
      */
     public function viewTalksInMonth(DateTime $date);
+
+    /**
+     * Get all talks.
+     * @return Collection
+     */
+    public function getAllTalks();
+
+    /**
+     * Add one or more prepared talks.
+     *
+     * @param Speaker $speaker  The speaker.
+     * @param array   $talk_ids Array of talk ids.
+     *
+     * @return Speaker The updated speaker.
+     */
+    public function addPreparedTalks(Speaker $speaker, $talk_ids);
 }

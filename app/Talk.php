@@ -23,7 +23,7 @@ class Talk extends Model
 
     public function subjects()
     {
-        $this->hasMany('App\TalkSubject');
+        return $this->hasMany('App\TalkSubject');
     }
 
     public function createdBy()
