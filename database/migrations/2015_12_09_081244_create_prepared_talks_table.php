@@ -20,6 +20,7 @@ class CreatePreparedTalksTable extends BaseMigration
             $table->integer('talk_subject_id')->unsigned();
             $table->foreign('speaker_id')->references('id')->on('speakers');
             $table->foreign('talk_subject_id')->references('id')->on('talk_subjects');
+            $this->common($table);
         });
     }
 

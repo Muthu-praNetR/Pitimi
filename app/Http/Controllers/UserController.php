@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests;
+use App\Services\Contracts\AdminService;
 
 /**
  * Class UserController
@@ -10,9 +11,24 @@ use App\Http\Requests;
  */
 class UserController extends Controller
 {
+    /**
+     * @var AdminService
+     */
+    private $adminService;
+
+    /**
+     * UserController constructor.
+     * @param AdminService $adminService
+     */
+    public function __construct(AdminService $adminService)
+    {
+        $this->adminService = $adminService;
+    }
+
     public function getList()
     {
-        return view('users.list-users');
+        $users = $this->adminService->getUsers();
+        return view('users.list-users')->with(compact('users'));
     }
 
     public function getNew()

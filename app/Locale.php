@@ -8,6 +8,9 @@ use Illuminate\Database\Eloquent\Model;
  * The Locale class represents a language.
  *
  * @author Rubens Mariuzzo <rubens@mariuzzo.com>
+ * @property integer $id
+ * @property string $code
+ * @property string $name
  */
 class Locale extends Model
 {

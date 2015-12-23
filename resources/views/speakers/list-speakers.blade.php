@@ -10,6 +10,7 @@
     </h2>
     @if($speakers->count() > 0)
         <a href="{{ route('new-speaker') }}" class="btn btn-primary pull-right">Create New Speaker</a>
+        {!! $speakers !!}
         <table class="table">
             <thead>
             <tr>
@@ -38,6 +39,7 @@
             @endforeach
             </tbody>
         </table>
+        {!! $speakers !!}
         <a href="{{ route('new-speaker') }}" class="btn btn-primary pull-right">Create New Speaker</a>
     @else
         <div class="alert alert-info">

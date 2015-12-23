@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 
 /**
  * The MenuComposer class.
- *
  * @author Rubens Mariuzzo <rubens@mariuzzo.com>
  */
 class MenuComposer
@@ -21,6 +20,7 @@ class MenuComposer
 
     /**
      * Create a new menu composer.
+     *
      * @param Request $request
      */
     public function __construct(Request $request)
@@ -37,19 +37,19 @@ class MenuComposer
      */
     public function compose(View $view)
     {
-        $route_name = $this->request->route()->getName();
+        $route_name = $this->request->route() ? $this->request->route()->getName() : '';
 
         $menu = [
             [
-                'text' => 'Calendar',
-                'icon' => 'calendar',
-                'url' => url('/'),
+                'text'   => 'Calendar',
+                'icon'   => 'calendar',
+                'url'    => url('/'),
                 'active' => $route_name === 'calendar',
             ],
             [
-                'text' => 'Speakers',
-                'icon' => 'user',
-                'url' => url('/speakers'),
+                'text'   => 'Speakers',
+                'icon'   => 'user',
+                'url'    => url('/speakers'),
                 'active' => $this->request->is('speaker*'),
             ],
         ];
@@ -57,15 +57,21 @@ class MenuComposer
         if (Auth::check() && Auth::user()->is_admin) {
             $menu = array_merge($menu, [
                 [
-                    'text' => 'Talks',
-                    'icon' => 'file-text-o',
-                    'url' => url('/talks'),
+                    'text'   => 'Talks',
+                    'icon'   => 'file-text-o',
+                    'url'    => url('/talks'),
                     'active' => $this->request->is('talk*'),
                 ],
                 [
-                    'text' => 'Users',
-                    'icon' => 'cog',
-                    'url' => url('/users'),
+                    'text'   => 'Congregations',
+                    'icon'   => 'building-o',
+                    'url'    => url('/congregations'),
+                    'active' => $this->request->is('congregation*'),
+                ],
+                [
+                    'text'   => 'Users',
+                    'icon'   => 'cog',
+                    'url'    => url('/users'),
                     'active' => $this->request->is('user*'),
                 ]
             ]);

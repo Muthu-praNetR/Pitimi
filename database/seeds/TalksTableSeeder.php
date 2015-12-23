@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Database\Seeder;
-use App\User;
 use App\Locale;
 use App\Talk;
 use App\TalkSubject;
+use App\User;
+use Illuminate\Database\Seeder;
 
 class TalksTableSeeder extends Seeder
 {
@@ -13,6 +13,9 @@ class TalksTableSeeder extends Seeder
      */
     public function run()
     {
+        DB::table('talks')->delete();
+        DB::table('talk_subjects')->delete();
+
         $ht_talks = [
             ['number' => 1, 'subject' => 'Eske w byen konnen Bondye?'],
             ['number' => 2, 'subject' => 'Eske n ap chape nan denye jou yo?'],

@@ -30,9 +30,17 @@ class CongregationService implements Contracts\CongregationService
         Log::debug('authenticate', compact('email'));
 
         $authenticated = Auth::attempt(['email' => $email, 'password' => $password]);
+        $user = Auth::user();
 
         if ($authenticated) {
             Log::debug('Authentication successful.', compact('email'));
+
+            // Select congregation.
+            if (!$user->is_admin) {
+                session(['congregation' => $user->congregations()->first()]);
+            } else {
+                session(['congregation' => null]);
+            }
         } else {
             Log::debug('Authentication failed.', compact('email'));
         }
@@ -60,7 +68,11 @@ class CongregationService implements Contracts\CongregationService
     public function createSpeaker(Speaker $speaker)
     {
         $user = Auth::user();
-        $speaker->congregation()->associate($user->congregations->first());
+
+        if (!$user->is_admin) {
+            $speaker->congregation()->associate($user->congregations->first());
+        }
+
         $speaker->createdBy()->associate($user);
         $speaker->updatedBy()->associate($user);
         $speaker->save();
@@ -87,7 +99,12 @@ class CongregationService implements Contracts\CongregationService
      */
     public function getSpeakers($page_size = 10)
     {
-        return Speaker::paginate(10);
+        if (auth()->user()->is_admin) {
+            return Speaker::paginate(10);
+        } else {
+            return Speaker::where('congregation_id', session('congregation')->id)
+                ->paginate(10);
+        }
     }
 
     /**

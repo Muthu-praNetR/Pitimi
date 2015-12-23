@@ -8,6 +8,19 @@ use Illuminate\Database\Eloquent\Model;
  * The Speaker class represents who present a talk.
  *
  * @author Rubens Mariuzzo <rubens@mariuzzo.com>
+ * @property integer $id
+ * @property string $first_name
+ * @property string $last_name
+ * @property integer $congregation_id
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ * @property integer $created_by
+ * @property integer $updated_by
+ * @property-read \App\Congregation $congregation
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\ScheduledTalk[] $scheduledTalks
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\PreparedTalk[] $preparedTalks
+ * @property-read \App\User $createdBy
+ * @property-read \App\User $updatedBy
  */
 class Speaker extends Model
 {
@@ -20,7 +33,7 @@ class Speaker extends Model
 
     public function scheduledTalks()
     {
-        return $this->hasMany('App\ScheduleTalk');
+        return $this->hasMany('App\ScheduledTalk');
     }
 
     public function preparedTalks()

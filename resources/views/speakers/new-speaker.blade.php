@@ -16,6 +16,15 @@
         <div class="form-group">
             <input type="text" class="form-control" name="last_name" placeholder="Last Name">
         </div>
+        @if(auth()->user()->is_admin)
+            <div class="form-group">
+                <select class="form-control" name="congregation_id">
+                    @foreach($congregations as $congregation)
+                        <option value="{{ $congregation->id }}">{{ $congregation->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+        @endif
         <a href="{{ route('list-speakers') }}" class="btn btn-default">Cancel</a>
         <button class="btn btn-primary">Save</button>
     </form>

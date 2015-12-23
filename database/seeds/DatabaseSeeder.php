@@ -1,11 +1,10 @@
 <?php
 
-use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Seeder;
 
 /**
- * The DatabaseSeeder class.
- *
+ * Class DatabaseSeeder
  * @author Rubens Mariuzzo <rubens@mariuzzo.com>
  */
 class DatabaseSeeder extends Seeder
@@ -18,7 +17,7 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call(LocalesTableSeeder::class);
-        $this->call(UsersTableSeeder::class);
+        $this->call(AdminSeeder::class);
         $this->call(TalksTableSeeder::class);
 
         Model::reguard();

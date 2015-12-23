@@ -2,12 +2,13 @@
 
 namespace App\Services\Contracts;
 
-use App\User;
+use App\Congregation;
 use App\Talk;
+use App\TalkSubject;
+use App\User;
 
 /**
  * The AdminService contract.
- *
  * @author Rubens Mariuzzo <rubens@mariuzzo.com>
  */
 interface AdminService
@@ -33,7 +34,7 @@ interface AdminService
     /**
      * Get all users.
      *
-     * @param number $page_size The page size.
+     * @param int|number $page_size The page size.
      *
      * @return array Array of users.
      */
@@ -140,4 +141,46 @@ interface AdminService
      * @param TalkSubject $talk_subject The talk subject.
      */
     public function deleteTalkSubject(TalkSubject $talk_subject);
+
+    /**
+     * Get all congregations.
+     * @return mixed
+     */
+    public function getAllCongregations();
+
+    /**
+     * Get congregations.
+     *
+     * @param $page_size
+     *
+     * @return mixed
+     */
+    public function getCongregations($page_size = 10);
+
+    /**
+     * Create a congregation.
+     *
+     * @param $congregation
+     *
+     * @return mixed
+     */
+    public function createCongregation(Congregation $congregation);
+
+    /**
+     * Get a congregation by id.
+     *
+     * @param $id int The id of the congregation.
+     *
+     * @return mixed A congregation.
+     */
+    public function getCongregation($id);
+
+    /**
+     * Update a congregation.
+     *
+     * @param $congregation Congregation The congregation.
+     *
+     * @return Congregation The updated congregation
+     */
+    public function updateCongregation(Congregation $congregation);
 }

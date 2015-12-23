@@ -38,9 +38,20 @@
                     @endforeach
                 </ul>
                 <ul class="nav navbar-nav navbar-right">
-                    <li class="dropdown">
-                        <p class="navbar-text"><i class="fa fa-building-o"></i> {{ Auth::user()->congregations()->first()->name }}</p>
+                    <li>
+                        <p class="navbar-text">
+                            <i class="fa fa-user"></i>
+                            {{ Auth::user()->first_name }}
+                            {{ Auth::user()->last_name }}
+                            ({{ Auth::user()->email }})
+                        </p>
                     </li>
+                    @if(session('congregation'))
+                        <li class="dropdown">
+                            <p class="navbar-text"><i
+                                        class="fa fa-building-o"></i> {{ session('congregation')->name }}</p>
+                        </li>
+                    @endif
                     <li>
                         <a href="{{ route('logout') }}">
                             <i class="fa fa-sign-out"></i>

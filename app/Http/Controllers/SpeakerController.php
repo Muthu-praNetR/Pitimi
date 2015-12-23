@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\Contracts\AdminService;
 use App\Services\Contracts\CongregationService;
 use App\Speaker;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * The SpeakerController class.
@@ -17,15 +19,21 @@ class SpeakerController extends Controller
      * @var CongregationService
      */
     private $congregationService;
+    /**
+     * @var AdminService
+     */
+    private $adminService;
 
 
     /**
      * SpeakerController constructor.
      * @param CongregationService $congregationService
+     * @param AdminService $adminService
      */
-    public function __construct(CongregationService $congregationService)
+    public function __construct(CongregationService $congregationService, AdminService $adminService)
     {
         $this->congregationService = $congregationService;
+        $this->adminService = $adminService;
     }
 
     public function getList()
@@ -36,7 +44,8 @@ class SpeakerController extends Controller
 
     public function getNew()
     {
-        return view('speakers.new-speaker');
+        $congregations = $this->adminService->getAllCongregations();
+        return view('speakers.new-speaker')->with(compact('congregations'));
     }
 
     public function postNew(Request $request)
@@ -44,6 +53,11 @@ class SpeakerController extends Controller
         $speaker = new Speaker();
         $speaker->first_name = $request->input('first_name');
         $speaker->last_name = $request->input('last_name');
+
+        if (Auth::user()->is_admin) {
+            $speaker->congregation_id = $request->input('congregation_id');
+        }
+
         $this->congregationService->createSpeaker($speaker);
 
         return redirect()->route('list-speakers');

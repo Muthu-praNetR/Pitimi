@@ -30,6 +30,12 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/{id}', ['uses' => 'UserController@getEdit', 'as' => 'edit-user']);
     Route::post('/user/{id}', ['uses' => 'UserController@postEdit']);
 
+    Route::get('/congregations', ['uses' => 'CongregationController@getList', 'as' => 'list-congregations']);
+    Route::get('/congregation/new', ['uses' => 'CongregationController@getNew', 'as' => 'new-congregation']);
+    Route::post('/congregation/new', ['uses' => 'CongregationController@postNew']);
+    Route::get('/congregation/{id}', ['uses' => 'CongregationController@getEdit', 'as' => 'edit-congregation']);
+    Route::post('/congregation/{id}', ['uses' => 'CongregationController@postEdit']);
+
     Route::get('/schedule/{year?}/{month?}/{day?}', ['uses' => 'ScheduleController@getNew', 'as' => 'new-schedule'])
         ->where([
             'year' => '[0-9]+',

@@ -1,16 +1,18 @@
 <?php
 
-namespace App\Services\Contracts;
+namespace App\Services;
 
-use App\User;
+use App\Congregation;
 use App\Talk;
+use App\TalkSubject;
+use App\User;
+use Auth;
 
 /**
  * The AdminService contract.
- *
  * @author Rubens Mariuzzo <rubens@mariuzzo.com>
  */
-class AdminService extends Contracts\AdminService
+class AdminService implements Contracts\AdminService
 {
     /**
      * Create a user.
@@ -39,13 +41,13 @@ class AdminService extends Contracts\AdminService
     /**
      * Get all users.
      *
-     * @param number $page_size The page size.
+     * @param int|number $page_size The page size.
      *
      * @return array Array of users.
      */
-    public function getUsers($page_size)
+    public function getUsers($page_size = 10)
     {
-        // TODO Implement me.
+        return User::paginate(10);
     }
 
     /**
@@ -185,4 +187,77 @@ class AdminService extends Contracts\AdminService
     {
         // TODO Implement me.
     }
+
+    /**
+     * Get congregations.
+     * @return mixed
+     */
+    public function getAllCongregations()
+    {
+        return Congregation::all();
+    }
+
+    /**
+     * Get congregations.
+     *
+     * @param int $page_size
+     *
+     * @return mixed
+     */
+    public function getCongregations($page_size = 10)
+    {
+        return Congregation::paginate($page_size);
+    }
+
+    /**
+     * Create a congregation.
+     *
+     * @param $congregation
+     *
+     * @return mixed
+     */
+    public function createCongregation(Congregation $congregation)
+    {
+        $user = Auth::user();
+
+        $congregation->createdBy()->associate($user);
+        $congregation->updatedBy()->associate($user);
+        $congregation->save();
+
+        return $congregation;
+    }
+
+    /**
+     * Get a congregation by id.
+     *
+     * @param $id int The id of the congregation.
+     *
+     * @return mixed A congregation.
+     */
+    public function getCongregation($id)
+    {
+        $congregation = Congregation::findOrFail($id);
+        return $congregation;
+    }
+
+    /**
+     * Update a congregation.
+     *
+     * @param $congregation Congregation The congregation.
+     *
+     * @return Congregation The updated congregation
+     */
+    public function updateCongregation(Congregation $congregation)
+    {
+        $original = Congregation::findOrFail($congregation->id);
+        $original->name = $congregation->name;
+        $original->is_group = $congregation->is_group;
+        $original->public_meeting_at = $congregation->public_meeting_at;
+        $original->updatedBy()->associate(Auth::user());
+        $original->save();
+
+        return $original;
+    }
+
+
 }
