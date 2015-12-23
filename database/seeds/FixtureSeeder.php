@@ -20,7 +20,7 @@ class FixtureSeeder extends Seeder
     public function run()
     {
         $admin = User::where('email', 'admin')->first();
-        $congregations = factory(Congregation::class, 10)->make();
+        $congregations = factory(Congregation::class, 15)->make();
 
         foreach ($congregations as $congregation) {
             $congregation->created_by = $admin->id;

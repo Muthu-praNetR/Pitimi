@@ -72,12 +72,12 @@ class SpeakerController extends Controller
         // Get input data.
         $first_name = $request->input('first_name');
         $last_name = $request->input('last_name');
-        $talk_ids = $request->input('selected_talk_ids');
+        $talk_ids = $request->input('talk_ids');
 
         // Create new speaker.
         $speaker = new Speaker();
-        $speaker->first_name = $request->input('first_name');
-        $speaker->last_name = $request->input('last_name');
+        $speaker->first_name = $first_name;
+        $speaker->last_name = $last_name;
 
         if (Auth::user()->is_admin) {
             $speaker->congregation_id = $request->input('congregation_id');
@@ -101,7 +101,8 @@ class SpeakerController extends Controller
     public function getEdit($id)
     {
         $speaker = $this->congregationService->getSpeaker($id);
-        return view('speakers.edit-speaker')->with(compact('speaker'));
+        return view('speakers.edit-speaker', $this->getNew()->getData())
+            ->with(compact('speaker'));
     }
 
     /**
@@ -114,11 +115,25 @@ class SpeakerController extends Controller
      */
     public function postEdit($id, Request $request)
     {
+        // Get input data.
+        $first_name = $request->input('first_name');
+        $last_name = $request->input('last_name');
+        $talk_ids = $request->input('talk_ids');
+
+        // Update speaker.
         $speaker = new Speaker();
         $speaker->id = $id;
-        $speaker->first_name = $request->input('first_name');
-        $speaker->last_name = $request->input('last_name');
+        $speaker->first_name = $first_name;
+        $speaker->last_name = $last_name;
+
+        if (Auth::user()->is_admin) {
+            $speaker->congregation_id = $request->input('congregation_id');
+        }
+
         $this->congregationService->updateSpeaker($speaker);
+
+
+
         return redirect()->route('list-speakers');
     }
 }

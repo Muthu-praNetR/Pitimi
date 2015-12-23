@@ -49,7 +49,7 @@
                     @foreach($talks as $key => $value)
                         <li class="talk">
                             {{ $value }}
-                            {!! Form::hidden('unselected_talk_ids[]', $value) !!}
+                            {!! Form::checkbox('talk_ids[]', $value) !!}
                         </li>
                     @endforeach
                 </ul>
@@ -67,11 +67,12 @@
         jQuery(function ($) {
             $('ul.talks').on('click', 'li', function (event) {
                 var $target = $(event.target);
-                $target.toggleClass('selected');
-                if ($target.is('.selected')) {
-                    $target.find('input').attr('name', 'selected_talk_ids[]');
+                var $checkbox = $target.find(':checkbox');
+                $checkbox.prop('checked', !$checkbox.prop('checked'));
+                if ($checkbox.is(':checked')) {
+                    $target.addClass('selected');
                 } else {
-                    $target.find('input').attr('name', 'unselected_talk_ids[]');
+                    $target.removeClass('selected');
                 }
             });
         });
