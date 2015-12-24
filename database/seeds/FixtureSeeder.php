@@ -4,7 +4,7 @@ use App\Congregation;
 use App\Locale;
 use App\PreparedTalk;
 use App\Speaker;
-use App\TalkSubject;
+use App\Talk;
 use App\User;
 use Illuminate\Database\Seeder;
 
@@ -41,10 +41,10 @@ class FixtureSeeder extends Seeder
                 $speaker->updated_by = $admin->id;
                 $speaker->save();
 
-                $talk_subjects = TalkSubject::orderByRaw('RAND()')->take(rand(1, 10))->get();
-                foreach ($talk_subjects as $talk_subject) {
+                $talks = Talk::orderByRaw('RAND()')->take(rand(1, 10))->get();
+                foreach ($talks as $talk) {
                     $prepared_talk = new PreparedTalk();
-                    $prepared_talk->talkSubject()->associate($talk_subject);
+                    $prepared_talk->talk()->associate($talk);
                     $prepared_talk->created_by = $admin->id;
                     $prepared_talk->updated_by = $admin->id;
                     $speaker->preparedTalks()->save($prepared_talk);

@@ -4,7 +4,6 @@ use Illuminate\Database\Schema\Blueprint;
 
 /**
  * The CreatePreparedTalksTable class.
- *
  * @author Rubens Mariuzzo <rubens@mariuzzo.com>
  */
 class CreatePreparedTalksTable extends BaseMigration
@@ -17,9 +16,9 @@ class CreatePreparedTalksTable extends BaseMigration
         Schema::create('prepared_talks', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('speaker_id')->unsigned();
-            $table->integer('talk_subject_id')->unsigned();
+            $table->integer('talk_id')->unsigned();
             $table->foreign('speaker_id')->references('id')->on('speakers');
-            $table->foreign('talk_subject_id')->references('id')->on('talk_subjects');
+            $table->foreign('talk_id')->references('id')->on('talks');
             $this->common($table);
         });
     }

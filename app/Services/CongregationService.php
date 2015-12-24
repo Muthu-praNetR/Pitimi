@@ -89,13 +89,14 @@ class CongregationService implements Contracts\CongregationService
      */
     public function getSpeaker($id)
     {
-        return Speaker::findOrFail($id);
+        return Speaker::with('preparedTalks.talk')
+            ->findOrFail($id);
     }
 
     /**
      * Get speakers.
      *
-     * @param int|number $page_size The page size.
+     * @param int $page_size The page size.
      *
      * @return array Array of speakers.
      */
@@ -220,12 +221,13 @@ class CongregationService implements Contracts\CongregationService
         foreach ($talks as $talk) {
             $prepared_talk = new PreparedTalk();
             $prepared_talk->speaker()->associate($speaker);
-            $prepared_talk->talkSubject()->associate($talk->subjects()->first());
+            $prepared_talk->talk()->associate($talk);
             $prepared_talk->createdBy()->associate($user);
             $prepared_talk->updatedBy()->associate($user);
             $prepared_talks[] = $prepared_talk;
         }
 
+        PreparedTalk::where('speaker_id', $speaker->id)->delete();
         $speaker->preparedTalks()->saveMany($prepared_talks);
         return $speaker;
     }

@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Auth;
 
 /**
  * The SpeakerController class.
- * @author Rubens Mariuzzo <rubens@mariuzzo.com>
+ * @package App\Http\Controllers
+ * @author  Rubens Mariuzzo <rubens@mariuzzo.com>
  */
 class SpeakerController extends Controller
 {
@@ -101,8 +102,9 @@ class SpeakerController extends Controller
     public function getEdit($id)
     {
         $speaker = $this->congregationService->getSpeaker($id);
+        $prepared_talk_ids = $speaker->preparedTalks->pluck('talk.number');
         return view('speakers.edit-speaker', $this->getNew()->getData())
-            ->with(compact('speaker'));
+            ->with(compact('speaker', 'prepared_talk_ids'));
     }
 
     /**
@@ -132,7 +134,8 @@ class SpeakerController extends Controller
 
         $this->congregationService->updateSpeaker($speaker);
 
-
+        // Add prepared talks.
+        $this->congregationService->addPreparedTalks($speaker, $talk_ids);
 
         return redirect()->route('list-speakers');
     }

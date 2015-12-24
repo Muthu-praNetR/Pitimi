@@ -49,7 +49,7 @@
                     @foreach($talks as $key => $value)
                         <li class="talk">
                             {{ $value }}
-                            {!! Form::checkbox('talk_ids[]', $value) !!}
+                            {!! Form::checkbox('talk_ids[]', $value, in_array($value, $prepared_talk_ids->toArray() )) !!}
                         </li>
                     @endforeach
                 </ul>

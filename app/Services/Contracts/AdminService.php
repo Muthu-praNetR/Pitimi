@@ -77,11 +77,11 @@ interface AdminService
     /**
      * Get all talks.
      *
-     * @param number $page_size The page size.
+     * @param int $page_size The page size.
      *
      * @return array Array of talks.
      */
-    public function getTalks($page_size);
+    public function getTalks($page_size = 10);
 
     /**
      * Update a talk.

@@ -51,11 +51,11 @@ interface CongregationService
     /**
      * Get speakers.
      *
-     * @param number $page_size The page size.
+     * @param int $page_size The page size.
      *
      * @return array Array of speakers.
      */
-    public function getSpeakers($page_size);
+    public function getSpeakers($page_size = 10);
 
     /**
      * Update a speaker.
