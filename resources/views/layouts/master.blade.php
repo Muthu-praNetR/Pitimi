@@ -11,10 +11,22 @@
 @if (Auth::check())
     <header>
         <div class="container">
-            <h1>
-                <i class="fa fa-cube"></i> {{ trans('messages.app_name')  }}
-                <small>{{ trans('messages.app_description') }}</small>
-            </h1>
+            <div class="row">
+                <div class="col-md-6">
+                    <h1>
+                        <i class="fa fa-cube"></i> {{ trans('messages.app_name') }}
+                        <small>{{ trans('messages.app_description') }}</small>
+                    </h1>
+                </div>
+                <div class="col-md-6">
+                    <ul class="language-switcher">
+                        <li><i class="fa fa-language"></i> Languages:</li>
+                        @foreach($locales as $locale)
+                            <li><a href="{{ Request::url() }}?lang={{ $locale->code }}">{{ $locale->name }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
         </div>
         <nav class="navbar navbar-default">
             <div class="container">

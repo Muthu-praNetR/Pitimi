@@ -25,5 +25,6 @@ class ViewComposerProvider extends ServiceProvider
     public function register()
     {
         view()->composer('*', 'App\Http\ViewComposers\MenuComposer');
+        view()->composer('*', 'App\Http\ViewComposers\LocaleSwitcherComposer');
     }
 }

@@ -1,0 +1,10 @@
+/**
+ * Language switcher component.
+ *
+ * @author Rubens Mariuzzo <rubens@mariuzzo.com>
+ */
+ul.language-switcher {
+  @extend .list-inline;
+  text-align: right;
+  margin-top: 30px;
+}
