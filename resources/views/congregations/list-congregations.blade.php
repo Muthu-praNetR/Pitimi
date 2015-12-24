@@ -29,9 +29,9 @@
                     <td>{{ $congregation->name }}</td>
                     <td>{{ $congregation->is_group ? trans('messages.yes') : trans('messages.no') }}</td>
                     <td>
-                        {{ trans('messages.every') }}
-                        {{ $congregation->public_meeting_at->format('l') }}
-                        {{ trans('messages.at') }}
+                        <span class="text-muted">{{ trans('messages.every') }}</span>
+                        {{ trans('messages.'. strtolower($congregation->public_meeting_at->format('l'))) }}
+                        <span class="text-muted">{{ trans('messages.at') }}</span>
                         {{ $congregation->public_meeting_at->format('h:i A') }}
                     </td>
                     <td>

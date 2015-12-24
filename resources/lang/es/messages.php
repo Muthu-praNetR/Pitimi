@@ -18,6 +18,7 @@ return [
 
     'calendar'      => 'Calendario',
     'schedule_talk' => 'Programar Discurso',
+    'today'         => 'Hoy',
 
     'create_new_speaker' => 'Crear Nuevo Orador',
     'first_name'         => 'Nombres',
@@ -38,6 +39,7 @@ return [
     'create_new_talk' => 'Agregar Bosquejo',
     'number'          => 'Número',
     'subject'         => 'Título',
+    'prepared'        => 'Preparados',
     'not_defined'     => 'No Definido',
     'no_talks'        => 'No hay bosquejos',
 
@@ -67,5 +69,18 @@ return [
     'friday'    => 'Viernes',
     'saturday'  => 'Sábado',
     'sunday'    => 'Domingo',
+
+    'month1'  => 'Enero',
+    'month2'  => 'Febrero',
+    'month3'  => 'Marzo',
+    'month4'  => 'Abril',
+    'month5'  => 'Mayo',
+    'month6'  => 'Junio',
+    'month7'  => 'Julio',
+    'month8'  => 'Agosto',
+    'month9'  => 'Septiembre',
+    'month10' => 'Octubre',
+    'month11' => 'Noviembre',
+    'month12' => 'Diciembre',
 
 ];

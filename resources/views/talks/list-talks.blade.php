@@ -14,16 +14,14 @@
         <table class="table">
             <thead>
             <tr>
-                <th>#</th>
                 <th>{{ trans('messages.number') }}</th>
                 <th>{{ trans('messages.subject') }}</th>
-                <th></th>
+                <th>{{ trans('messages.prepared') }}</th>
             </tr>
             </thead>
             <tbody>
             @foreach($talks as $talk)
                 <tr>
-                    <td>{{ $talk->id }}</td>
                     <td>{{ $talk->number }}</td>
                     <td>
                         @if ($talk->subjects->count() > 0)
@@ -34,11 +32,7 @@
                             </small>
                         @endif
                     </td>
-                    <td>
-                        <a href="{{ route('edit-talk', $talk->id) }}">
-                            <i class="fa fa-pencil"></i> {{ trans('messages.edit') }}
-                        </a>
-                    </td>
+                    <td>{{ $talk->prepared->count() }}</td>
                 </tr>
             @endforeach
             </tbody>

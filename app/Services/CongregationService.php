@@ -8,6 +8,7 @@ use App\Speaker;
 use App\Talk;
 use App\TalkSubject;
 use Auth;
+use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Collection;
 use Log;
@@ -250,6 +251,45 @@ class CongregationService implements Contracts\CongregationService
     public function getAllSpeakers()
     {
         return Speaker::with('congregation')->get();
+    }
+
+    /**
+     * Get calendar program for a month
+     *
+     * @param Carbon $month The month date.
+     *
+     * @return array A list of days for a calendar month.
+     */
+    public function getCalendar(Carbon $month)
+    {
+        $month = $month->copy();
+        $month->startOfMonth();
+        $current = $month->copy();
+
+        // Set first day of week.
+        $week_start_on = Carbon::MONDAY;
+        if ($month->dayOfWeek != $week_start_on) {
+            $month->previous($week_start_on);
+        }
+
+        $public_meeting_day_of_week = session('congregation') ? session('congregation')->public_meeting_at->dayOfWeek : -1;
+
+        // Generate all calendar month dates.
+        $calendar = [];
+        $date = $month->copy();
+        do {
+            for ($i = 0; $i < 7; ++$i) {
+                $calendar[] = [
+                    'date'       => $date,
+                    'in_month'   => $date->month === $current->month,
+                    'is_meeting' => $public_meeting_day_of_week === $date->dayOfWeek,
+                    'is_today'   => $date->isToday(),
+                ];
+                $date = $date->copy()->addDay();
+            }
+        } while ($date->month == $current->month);
+
+        return $calendar;
     }
 
 

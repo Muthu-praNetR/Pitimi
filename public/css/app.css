@@ -7859,6 +7859,12 @@ button.close {
     display: block; }
   #calendar-page .day.not-in-month {
     opacity: .5; }
+  #calendar-page .day.is-meeting {
+    border: #bbb solid 1px;
+    background-color: #f4f4f4; }
+  #calendar-page .day.is-today {
+    border: #85afd4 solid 1px;
+    background-color: #d6e4f1; }
 
 /**
  * New speaker page.

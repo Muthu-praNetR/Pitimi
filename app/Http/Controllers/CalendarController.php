@@ -3,21 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Services\Contracts\CongregationService;
+use App\Services\Contracts\DateService;
 use Carbon\Carbon;
 
 /**
  * The CalendarController class.
- *
  * @author Rubens Mariuzzo <rubens@mariuzzo.com>
  */
 class CalendarController extends Controller
 {
     /**
      * The congregation service.
-     *
      * @var CongregationService
      */
     protected $congregationService;
+    /**
+     * @var DateService
+     */
+    private $dateService;
 
     # Constructor.
 
@@ -25,10 +28,12 @@ class CalendarController extends Controller
      * Construct a CalendarController.
      *
      * @param CongregationService $congregationService The congregation service.
+     * @param DateService         $dateService         The date service.
      */
-    public function __construct(CongregationService $congregationService)
+    public function __construct(CongregationService $congregationService, DateService $dateService)
     {
         $this->congregationService = $congregationService;
+        $this->dateService = $dateService;
     }
 
     # Actions.
@@ -43,39 +48,24 @@ class CalendarController extends Controller
      */
     public function calendar($year = null, $month = null)
     {
+
         if (!isset($year) || !isset($month)) {
             $current = Carbon::now();
 
             return redirect()->route('calendar', ['month' => $current->month, 'year' => $current->year]);
         }
 
-        // Determine first day of calendar month.
-        $start = Carbon::createFromDate($year, $month)->startOfMonth();
-        $current = $start->copy();
-        $week_start_on = Carbon::MONDAY;
-
-        if ($start->dayOfWeek != $week_start_on) {
-            $start->previous($week_start_on);
-        }
-
-        // Generate all calendar month dates.
-        $date = $start->copy();
-        $calendar = [];
-        do {
-            for ($i = 0; $i < 7; ++$i) {
-                $calendar[] = [
-                    'date' => $date,
-                    'inMonth' => $date->month == $current->month,
-                ];
-                $date = $date->copy()->addDay();
-            }
-        } while ($date->month == $current->month);
+        $current = Carbon::createFromDate($year, $month);
+        $calendar = $this->congregationService->getCalendar($current);
+        $days_of_week = $this->dateService->getDaysOfWeek();
 
         return view('calendar')->with([
-            'calendar' => $calendar,
-            'current' => $current,
-            'previous' => $current->copy()->subMonth(),
-            'next' => $current->copy()->addMonth(),
+            'calendar'     => $calendar,
+            'current'      => $current,
+            'previous'     => $current->copy()->subMonth(),
+            'next'         => $current->copy()->addMonth(),
+            'today'        => Carbon::now(),
+            'days_of_week' => $days_of_week,
         ]);
     }
 }

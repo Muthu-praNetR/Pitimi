@@ -5,39 +5,50 @@
  */
 #calendar-page {
 
-    $calendar-spacing: 5px;
+  $calendar-spacing: 5px;
 
-    .toolbar {
-        margin-bottom: 10px;
+  .toolbar {
+    margin-bottom: 10px;
+  }
+
+  .btn.current {
+    width: 150px;
+  }
+
+  ul.calendar {
+    list-style-type: none;
+    margin: -$calendar-spacing;
+    padding: 0;
+
+    > li {
+      float: left;
+      width: (100%/7);
+      padding: $calendar-spacing;
+    }
+  }
+
+  .day {
+    border: #ccc solid 1px;
+    padding: 10px;
+
+    .date {
+      display: block;
     }
 
-    .btn.current {
-        width: 150px;
+    &.not-in-month {
+      opacity: .5;
     }
 
-    ul.calendar {
-        list-style-type: none;
-        margin: -$calendar-spacing;
-        padding: 0;
-
-        > li {
-            float: left;
-            width: (100%/7);
-            padding: $calendar-spacing;
-        }
+    &.is-meeting {
+      border: #bbb solid 1px;
+      background-color: #f4f4f4;
     }
 
-    .day {
-        border: #ccc solid 1px;
-        padding: 10px;
-
-        .date {
-            display: block;
-        }
-
-        &.not-in-month {
-            opacity: .5;
-        }
+    &.is-today {
+      border: mix($brand-primary, #fff, 60%) solid 1px;
+      background-color: mix($brand-primary, #fff, 20%);
     }
+
+  }
 
 }

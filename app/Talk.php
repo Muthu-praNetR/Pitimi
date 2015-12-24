@@ -30,6 +30,15 @@ class Talk extends Model
     }
 
     /**
+     * Get all prepared talks.
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function prepared()
+    {
+        return $this->hasMany('App\PreparedTalk');
+    }
+
+    /**
      * Get the user that created the talk.
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

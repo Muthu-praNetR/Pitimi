@@ -6,25 +6,29 @@
 @section('content')
     <h2>
         <i class="fa fa-calendar"></i>
-        {{ trans('messages.calendar') }}
+        {{ trans('messages.month'.$current->month) }}
+        {{ $current->format('Y') }}
     </h2>
 
     <div class="toolbar">
         <a href="{{ route('calendar', ['month' => $previous->month, 'year' => $previous->year]) }}"
            class="btn btn-default previous"><i class="fa fa-arrow-left"></i></a>
-        <a href="{{ route('calendar', ['month' => $current->month, 'year' => $current->year]) }}"
-           class="btn btn-default current">{{ $current->format('F, Y') }}</a>
+        <a href="{{ route('calendar', ['month' => $today->month, 'year' => Carbon\Carbon::now()->year]) }}"
+           class="btn btn-default">{{ trans('messages.today') }}</a>
         <a href="{{ route('calendar', ['month' => $next->month, 'year' => $next->year]) }}"
            class="btn btn-default next"><i class="fa fa-arrow-right"></i></a>
     </div>
 
     <ul class="calendar">
+        @foreach($days_of_week as $day_of_week)
+            <li><strong>{{ $day_of_week }}</strong></li>
+        @endforeach
         @foreach($calendar as $item)
             <li>
-                <div class="day {{ $item['inMonth'] ? 'in-month' : 'not-in-month' }}">
+                <div class="day {{ $item['in_month'] ? 'in-month' : 'not-in-month' }} {{ $item['is_meeting'] ? 'is-meeting' : 'is-not-meeting' }} {{ $item['is_today'] ? 'is-today' : 'is-not-today' }}">
                     <span class="date">{{ $item['date']->day }}</span>
                     <a href="{{ route('new-schedule', ['year'=>$item['date']->year, 'month'=>$item['date']->month, 'day'=>$item['date']->day])  }}"
-                       class="btn btn-default">{{ trans('messages.schedule_talk') }}</a>
+                       class="btn btn-default btn-xs">{{ trans('messages.schedule_talk') }}</a>
                 </div>
             </li>
         @endforeach

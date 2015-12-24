@@ -6,6 +6,7 @@ use App\PreparedTalk;
 use App\ScheduledTalk;
 use App\Speaker;
 use App\TalkSubject;
+use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Collection;
 
@@ -138,4 +139,13 @@ interface CongregationService
      * @return array Array of speakers.
      */
     public function getAllSpeakers();
+
+    /**
+     * Get calendar program for a month
+     *
+     * @param Carbon $month The month date.
+     *
+     * @return array A list of days for a calendar month.
+     */
+    public function getCalendar(Carbon $month);
 }

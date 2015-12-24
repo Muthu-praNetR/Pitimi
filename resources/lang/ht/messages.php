@@ -18,6 +18,7 @@ return [
 
     'calendar'      => 'Kalandriye',
     'schedule_talk' => 'Pwograme Diskou',
+    'today'         => 'Jodi a',
 
     'create_new_speaker' => 'Kreye Nouvo Oratè',
     'first_name'         => 'Non',
@@ -38,6 +39,7 @@ return [
     'create_new_talk' => 'Kreye Nouvo Plan',
     'number'          => 'Nimewo',
     'subject'         => 'Sijè',
+    'prepared'        => 'Kantite ki Prepare yo',
     'not_defined'     => 'Poko Defini',
     'no_talks'        => 'Pa gen plan',
 
@@ -67,5 +69,18 @@ return [
     'friday'    => 'Vandredi',
     'saturday'  => 'Samdi',
     'sunday'    => 'Dimanch',
+
+    'month1'  => 'Janvye',
+    'month2'  => 'Fevrye',
+    'month3'  => 'Mas',
+    'month4'  => 'Avril',
+    'month5'  => 'Me',
+    'month6'  => 'Jen',
+    'month7'  => 'Jiyè',
+    'month8'  => 'Out',
+    'month9'  => 'Septanm',
+    'month10' => 'Oktòb',
+    'month11' => 'Novanm',
+    'month12' => 'Desanm',
 
 ];

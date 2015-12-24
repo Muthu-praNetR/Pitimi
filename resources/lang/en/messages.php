@@ -18,6 +18,7 @@ return [
 
     'calendar'      => 'Calendar',
     'schedule_talk' => 'Schedule Talk',
+    'today'         => 'Today',
 
     'create_new_speaker' => 'Create New Speaker',
     'first_name'         => 'First Name',
@@ -38,6 +39,7 @@ return [
     'create_new_talk' => 'Create New Talk',
     'number'          => 'Number',
     'subject'         => 'Subject',
+    'prepared'        => 'Prepared',
     'not_defined'     => 'Not Defined',
     'no_talks'        => 'There are no talks',
 
@@ -67,5 +69,18 @@ return [
     'friday'    => 'Friday',
     'saturday'  => 'Saturday',
     'sunday'    => 'Sunday',
+
+    'month1'  => 'January',
+    'month2'  => 'February',
+    'month3'  => 'March',
+    'month4'  => 'April',
+    'month5'  => 'May',
+    'month6'  => 'June',
+    'month7'  => 'July',
+    'month8'  => 'August',
+    'month9'  => 'September',
+    'month10' => 'October',
+    'month11' => 'November',
+    'month12' => 'December',
 
 ];
