@@ -41,13 +41,13 @@ class MenuComposer
 
         $menu = [
             [
-                'text'   => 'Calendar',
+                'text'   => trans('messages.calendar'),
                 'icon'   => 'calendar',
                 'url'    => url('/'),
                 'active' => $route_name === 'calendar',
             ],
             [
-                'text'   => 'Speakers',
+                'text'   => trans('messages.speakers'),
                 'icon'   => 'user',
                 'url'    => url('/speakers'),
                 'active' => $this->request->is('speaker*'),
@@ -57,19 +57,19 @@ class MenuComposer
         if (Auth::check() && Auth::user()->is_admin) {
             $menu = array_merge($menu, [
                 [
-                    'text'   => 'Talks',
+                    'text'   => trans('messages.talks'),
                     'icon'   => 'file-text-o',
                     'url'    => url('/talks'),
                     'active' => $this->request->is('talk*'),
                 ],
                 [
-                    'text'   => 'Congregations',
+                    'text'   => trans('messages.congregations'),
                     'icon'   => 'building-o',
                     'url'    => url('/congregations'),
                     'active' => $this->request->is('congregation*'),
                 ],
                 [
-                    'text'   => 'Users',
+                    'text'   => trans('messages.users'),
                     'icon'   => 'cog',
                     'url'    => url('/users'),
                     'active' => $this->request->is('user*'),

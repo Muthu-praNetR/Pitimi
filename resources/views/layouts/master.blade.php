@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Pitimi - @yield('title')</title>
+    <title>{{ trans('messages.app_name') }} - @yield('title')</title>
     <link rel="stylesheet" href="{{ asset('/css/app.css') }}">
 </head>
 
@@ -12,8 +12,8 @@
     <header>
         <div class="container">
             <h1>
-                <i class="fa fa-cube"></i> Pitimi
-                <small>Public Talk Manager</small>
+                <i class="fa fa-cube"></i> {{ trans('messages.app_name')  }}
+                <small>{{ trans('messages.app_description') }}</small>
             </h1>
         </div>
         <nav class="navbar navbar-default">
@@ -55,7 +55,7 @@
                     <li>
                         <a href="{{ route('logout') }}">
                             <i class="fa fa-sign-out"></i>
-                            Logout
+                            {{ trans('messages.logout') }}
                         </a>
                     </li>
                 </ul>

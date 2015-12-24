@@ -1,12 +1,12 @@
 @extends('layouts.master')
 
 @section('id', 'calendar-page')
-@section('title', 'Calendar')
+@section('title', trans('messages.calendar'))
 
 @section('content')
     <h2>
         <i class="fa fa-calendar"></i>
-        Calendar
+        {{ trans('messages.calendar') }}
     </h2>
 
     <div class="toolbar">
@@ -24,7 +24,7 @@
                 <div class="day {{ $item['inMonth'] ? 'in-month' : 'not-in-month' }}">
                     <span class="date">{{ $item['date']->day }}</span>
                     <a href="{{ route('new-schedule', ['year'=>$item['date']->year, 'month'=>$item['date']->month, 'day'=>$item['date']->day])  }}"
-                       class="btn btn-default">Schedule Talk</a>
+                       class="btn btn-default">{{ trans('messages.schedule_talk') }}</a>
                 </div>
             </li>
         @endforeach

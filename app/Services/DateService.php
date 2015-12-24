@@ -19,13 +19,13 @@ class DateService implements Contracts\DateService
     public function getDaysOfWeek()
     {
         return [
-            Carbon::MONDAY    => 'Monday',
-            Carbon::TUESDAY   => 'Tuesday',
-            Carbon::WEDNESDAY => 'Wednesday',
-            Carbon::THURSDAY  => 'Thursday',
-            Carbon::FRIDAY    => 'Friday',
-            Carbon::SATURDAY  => 'Saturday',
-            Carbon::SUNDAY    => 'Sunday',
+            Carbon::MONDAY    => trans('messages.monday'),
+            Carbon::TUESDAY   => trans('messages.tuesday'),
+            Carbon::WEDNESDAY => trans('messages.wednesday'),
+            Carbon::THURSDAY  => trans('messages.thursday'),
+            Carbon::FRIDAY    => trans('messages.friday'),
+            Carbon::SATURDAY  => trans('messages.saturday'),
+            Carbon::SUNDAY    => trans('messages.sunday'),
         ];
     }
 

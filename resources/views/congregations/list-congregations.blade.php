@@ -1,23 +1,24 @@
 @extends('layouts.master')
 
 @section('id', 'list-congregations-page')
-@section('title', 'Congregations')
+@section('title', trans('messages.congregations'))
 
 @section('content')
     <h2>
         <i class="fa fa-building-o"></i>
-        Congregations
+        {{ trans('messages.congregations') }}
     </h2>
     @if($congregations->count() > 0)
-        <a href="{{ route('new-congregation') }}" class="btn btn-primary pull-right">Create New Congregation</a>
+        <a href="{{ route('new-congregation') }}"
+           class="btn btn-primary pull-right">{{ trans('messages.create_new_congregation') }}</a>
         {!! $congregations !!}
         <table class="table">
             <thead>
             <tr>
                 <th>#</th>
-                <th>Name</th>
-                <th>Is Group?</th>
-                <th>Public Meeting Date and Time</th>
+                <th>{{ trans('messages.name') }}</th>
+                <th>{{ trans('messages.is_group') }}</th>
+                <th>{{ trans('messages.public_meeting_date_and_time') }}</th>
                 <th></th>
             </tr>
             </thead>
@@ -26,16 +27,16 @@
                 <tr>
                     <td>{{ $congregation->id }}</td>
                     <td>{{ $congregation->name }}</td>
-                    <td>{{ $congregation->is_group ? 'Yes' : 'No' }}</td>
+                    <td>{{ $congregation->is_group ? trans('messages.yes') : trans('messages.no') }}</td>
                     <td>
-                        Every
+                        {{ trans('messages.every') }}
                         {{ $congregation->public_meeting_at->format('l') }}
-                        at
+                        {{ trans('messages.at') }}
                         {{ $congregation->public_meeting_at->format('h:i A') }}
                     </td>
                     <td>
                         <a href="{{ route('edit-congregation', $congregation->id) }}">
-                            <i class="fa fa-pencil"></i> Edit
+                            <i class="fa fa-pencil"></i> {{ trans('messages.edit') }}
                         </a>
                     </td>
                 </tr>
@@ -43,12 +44,14 @@
             </tbody>
         </table>
         {!! $congregations !!}
-        <a href="{{ route('new-congregation') }}" class="btn btn-primary pull-right">Create New Congregation</a>
+        <a href="{{ route('new-congregation') }}"
+           class="btn btn-primary pull-right">{{ trans('messages.create_new_congregation') }}</a>
     @else
         <div class="alert alert-info">
             <i class="fa fa-exclamation"></i>
-            There are no congregations.
-            <a href="{{ route('new-congregation') }}" class="btn btn-primary">Create New Congregation</a>
+            {{ trans('messages.no_congregations') }}.
+            <a href="{{ route('new-congregation') }}"
+               class="btn btn-primary">{{ trans('messages.create_new_congregation') }}</a>
         </div>
     @endif
 @endsection
