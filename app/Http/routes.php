@@ -8,7 +8,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/{year?}/{month?}', ['as' => 'calendar', 'uses' => 'CalendarController@calendar'])
         ->where([
-            'year' => '[0-9]+',
+            'year'  => '[0-9]+',
             'month' => '[0-9]+',
         ]);
 
@@ -38,15 +38,15 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('/schedule/{year?}/{month?}/{day?}', ['uses' => 'ScheduleController@getNew', 'as' => 'new-schedule'])
         ->where([
-            'year' => '[0-9]+',
+            'year'  => '[0-9]+',
             'month' => '[0-9]+',
-            'day' => '[0-9]+',
+            'day'   => '[0-9]+',
         ]);
     Route::post('/schedule/{year?}/{month?}/{day?}', ['uses' => 'ScheduleController@postNew'])
         ->where([
-            'year' => '[0-9]+',
+            'year'  => '[0-9]+',
             'month' => '[0-9]+',
-            'day' => '[0-9]+',
+            'day'   => '[0-9]+',
         ]);
 
 });
