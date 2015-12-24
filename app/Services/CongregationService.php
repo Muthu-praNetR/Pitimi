@@ -242,4 +242,15 @@ class CongregationService implements Contracts\CongregationService
         $speaker->preparedTalks()->saveMany($prepared_talks);
         return $speaker;
     }
+
+    /**
+     * Get all speakers.
+     * @return array Array of speakers.
+     */
+    public function getAllSpeakers()
+    {
+        return Speaker::with('congregation')->get();
+    }
+
+
 }

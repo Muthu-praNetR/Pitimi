@@ -132,4 +132,10 @@ interface CongregationService
      * @return Speaker The updated speaker.
      */
     public function addPreparedTalks(Speaker $speaker, $talk_ids);
+
+    /**
+     * Get all speakers.
+     * @return array Array of speakers.
+     */
+    public function getAllSpeakers();
 }

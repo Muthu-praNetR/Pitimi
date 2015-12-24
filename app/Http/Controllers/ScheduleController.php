@@ -31,8 +31,10 @@ class ScheduleController extends Controller
     public function getNew($year, $month, $day)
     {
         $date = Carbon::createFromDate($year, $month, $day);
+
+        // Get talks.
         $talks = [];
-        $this->congregationService->getAllTalks()->map(function ($talk) use (&$talks) {
+        $this->congregationService->getAllTalks()->each(function ($talk) use (&$talks) {
             $subject = 'Not Defined';
             if ($talk->subjects->count() > 0) {
                 $subject = $talk->subjects->first()->subject;
@@ -40,7 +42,14 @@ class ScheduleController extends Controller
             $talks[$talk->id] = $talk->number . ' - ' . $subject;
         });
 
-        return view('schedules.new-schedule')->with(compact('date', 'talks'));
+        // Get speakers.
+        $speakers = [];
+        $this->congregationService->getAllSpeakers()->each(function ($speaker) use (&$speakers) {
+            $speakers[$speaker->id] = $speaker->first_name . ' ' . $speaker->last_name . ' (' . $speaker->congregation->name . ')';
+        });
+        $speakers = collect($speakers)->sort();
+
+        return view('schedules.new-schedule')->with(compact('date', 'talks', 'speakers'));
     }
 
     public function postNew()
