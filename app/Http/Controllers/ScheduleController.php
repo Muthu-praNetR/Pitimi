@@ -7,8 +7,9 @@ use App\Services\Contracts\CongregationService;
 use Carbon\Carbon;
 
 /**
- * Class ScheduleController
+ * The ScheduleController class.
  * @package App\Http\Controllers
+ * @author  Rubens Mariuzzo <rubens@mariuzzo.com>
  */
 class ScheduleController extends Controller
 {
@@ -19,6 +20,7 @@ class ScheduleController extends Controller
 
     /**
      * ScheduleController constructor.
+     *
      * @param CongregationService $congregationService
      */
     public function __construct(CongregationService $congregationService)
@@ -29,7 +31,16 @@ class ScheduleController extends Controller
     public function getNew($year, $month, $day)
     {
         $date = Carbon::createFromDate($year, $month, $day);
-        return view('schedules.new-schedule')->with(compact('date'));
+        $talks = [];
+        $this->congregationService->getAllTalks()->map(function ($talk) use (&$talks) {
+            $subject = 'Not Defined';
+            if ($talk->subjects->count() > 0) {
+                $subject = $talk->subjects->first()->subject;
+            }
+            $talks[$talk->id] = $talk->number . ' - ' . $subject;
+        });
+
+        return view('schedules.new-schedule')->with(compact('date', 'talks'));
     }
 
     public function postNew()

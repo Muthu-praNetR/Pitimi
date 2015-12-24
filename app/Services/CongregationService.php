@@ -201,7 +201,18 @@ class CongregationService implements Contracts\CongregationService
      */
     public function getAllTalks()
     {
-        return Talk::all();
+        $user = Auth::user();
+        $talks = Talk::with(['subjects' => function ($query) use ($user) {
+            $query->where('locale_id', $user->locale_id);
+        }])->get();
+
+        foreach ($talks as $talk) {
+            $talk->subjects = $talk->subjects->reject(function ($subject) use ($user) {
+                return $subject->locale_id !== $user->locale_id;
+            });
+        }
+
+        return $talks;
     }
 
     /**
