@@ -125,12 +125,14 @@ class SpeakerController extends Controller
         $first_name = $request->input('first_name');
         $last_name = $request->input('last_name');
         $talk_ids = $request->input('talk_ids');
+        $email = $request->input('email');
 
         // Update speaker.
         $speaker = new Speaker();
         $speaker->id = $id;
         $speaker->first_name = $first_name;
         $speaker->last_name = $last_name;
+        $speaker->email = $email;
 
         if (Auth::user()->is_admin) {
             $speaker->congregation_id = $request->input('congregation_id');

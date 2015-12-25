@@ -15,7 +15,6 @@
         <table class="table">
             <thead>
             <tr>
-                <th>#</th>
                 <th>{{ trans('messages.first_name') }}</th>
                 <th>{{ trans('messages.last_name') }}</th>
                 <th>{{ trans('messages.email') }}</th>
@@ -27,7 +26,6 @@
             <tbody>
             @foreach($speakers as $speaker)
                 <tr>
-                    <td>{{ $speaker->id }}</td>
                     <td>{{ $speaker->first_name }}</td>
                     <td>{{ $speaker->last_name }}</td>
                     <td><a href="mailto:{{ $speaker->email }}">{{ $speaker->email }}</a></td>

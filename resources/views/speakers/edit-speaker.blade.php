@@ -31,6 +31,15 @@
                     ])
                 !!}
             </div>
+            <div class="form-group">
+                <label for="email">{{ trans('messages.email') }}:</label>
+                {!! Form::text('email', null, [
+                    'class'       => 'form-control',
+                    'id'          => 'email',
+                    'placeholder' => trans('messages.email'),
+                    ])
+                !!}
+            </div>
             @if(auth()->user()->is_admin)
                 <div class="form-group">
                     <label for="congregation_id">{{ trans('messages.congregation') }}:</label>

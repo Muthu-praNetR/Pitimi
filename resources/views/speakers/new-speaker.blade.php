@@ -33,7 +33,7 @@
             </div>
             <div class="form-group">
                 <label for="email">{{ trans('messages.email') }}:</label>
-                {!! Form::text('last_name', null, [
+                {!! Form::text('email', null, [
                     'class'       => 'form-control',
                     'id'          => 'email',
                     'placeholder' => trans('messages.email'),
