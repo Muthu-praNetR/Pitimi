@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -24,6 +25,19 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ScheduledTalk extends Model
 {
+    /**
+     * The attributes that should be mutated to dates.
+     * @var array
+     */
+    protected $dates = ['created_at', 'updated_at', 'scheduled_at'];
+
+    // Scopes.
+
+    public function scopeInCongregation(Builder $query, Congregation $congregation)
+    {
+        $query->where('congregation_id', $congregation->id);
+    }
+
     // Relationships.
 
     public function congregation()

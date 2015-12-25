@@ -7825,6 +7825,13 @@ button.close {
   content: ""; }
 
 /**
+ * Extras.
+ * @author Rubens Mariuzzo <rubens@mariuzzo.com>
+ */
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+  display: none !important; }
+
+/**
  * Login page.
  *
  * @author Rubens Mariuzzo <rubens@mariuzzo.com>
@@ -7854,7 +7861,8 @@ button.close {
 
 #calendar-page .day {
   border: #ccc solid 1px;
-  padding: 10px; }
+  padding: 10px;
+  height: 100px; }
   #calendar-page .day .date {
     display: block; }
   #calendar-page .day.not-in-month {
@@ -7921,6 +7929,14 @@ button.close {
       color: #fff; }
     #edit-speaker-page ul.talks > li > input[type=checkbox] {
       display: none; }
+
+/**
+ * New schedule page.
+ *
+ * @author Rubens Mariuzzo <rubens@mariuzzo.com>
+ */
+#new-schedule-page div.alert {
+  margin-top: 20px; }
 
 /**
  * Language switcher component.

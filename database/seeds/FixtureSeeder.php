@@ -3,9 +3,11 @@
 use App\Congregation;
 use App\Locale;
 use App\PreparedTalk;
+use App\ScheduledTalk;
 use App\Speaker;
 use App\Talk;
 use App\User;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 /**
@@ -45,10 +47,30 @@ class FixtureSeeder extends Seeder
                 foreach ($talks as $talk) {
                     $prepared_talk = new PreparedTalk();
                     $prepared_talk->talk()->associate($talk);
-                    $prepared_talk->created_by = $admin->id;
-                    $prepared_talk->updated_by = $admin->id;
+                    $prepared_talk->createdBy()->associate($admin);
+                    $prepared_talk->updatedBy()->associate($admin);
                     $speaker->preparedTalks()->save($prepared_talk);
                 }
+            }
+        }
+
+        $congregations = Congregation::all();
+        foreach ($congregations as $congregation) {
+            $prepared_talks = PreparedTalk::whereHas('speaker', function ($query) use ($congregation) {
+                $query->where('congregation_id', '<>', $congregation->id);
+            })->orderByRaw('RAND()')->take(rand(1, 4))->get();
+
+            $date = Carbon::now();
+            $date->next($congregation->public_meeting_at->dayOfWeek);
+            foreach ($prepared_talks as $prepared_talk) {
+                $scheduled_talk = new ScheduledTalk();
+                $scheduled_talk->preparedTalk()->associate($prepared_talk);
+                $scheduled_talk->speaker()->associate($prepared_talk->speaker);
+                $scheduled_talk->scheduled_at = $date;
+                $scheduled_talk->createdBy()->associate($admin);
+                $scheduled_talk->updatedBy()->associate($admin);
+                $congregation->scheduledTalks()->save($scheduled_talk);
+                $date->addWeek();
             }
         }
 

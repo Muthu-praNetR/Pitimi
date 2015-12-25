@@ -83,4 +83,14 @@ return [
     'month11' => 'Novanm',
     'month12' => 'Desanm',
 
+    'new_schedule'                  => 'Pwograme Diskou',
+    'talk_subject'                  => 'Sijè Plan an',
+    'available_speakers'            => 'Oratè ki Disponib yo',
+    'date'                          => 'Dat',
+    'select_talk_title'             => 'Chwazi Sijè Diskou a',
+    'select_available_speaker'      => 'Chwazi yon Oratè ki Disponib',
+    'confirm_date'                  => 'Konfime Dat la',
+    'select_a_talk'                 => 'Chwazi yon Sijè Diskou',
+    'no_speakers_for_selected_talk' => 'Pa gen oratè ki disponib pou sijè diskou w chwazi a',
+
 ];

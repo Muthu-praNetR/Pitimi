@@ -83,4 +83,14 @@ return [
     'month11' => 'November',
     'month12' => 'December',
 
+    'new_schedule'                  => 'New Schedule',
+    'talk_subject'                  => 'Talk Subject',
+    'available_speakers'            => 'Available Speakers',
+    'date'                          => 'Date',
+    'select_talk_title'             => 'Select a Talk Title',
+    'select_available_speaker'      => 'Select an Available Speaker',
+    'confirm_date'                  => 'Confirm Date',
+    'select_a_talk'                 => 'Select a Talk Title',
+    'no_speakers_for_selected_talk' => 'There are no speakers for the selected talk',
+
 ];

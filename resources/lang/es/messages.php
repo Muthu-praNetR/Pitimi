@@ -83,4 +83,14 @@ return [
     'month11' => 'Noviembre',
     'month12' => 'Diciembre',
 
+    'new_schedule'                  => 'Programar Discurso',
+    'talk_subject'                  => 'Título de Bosquejo',
+    'available_speakers'            => 'Oradores Disponibles',
+    'date'                          => 'Fecha',
+    'select_talk_title'             => 'Seleccione el Título del Bosquejo',
+    'select_available_speaker'      => 'Seleccione un Orador Disponible',
+    'confirm_date'                  => 'Confirme la Fecha',
+    'select_a_talk'                 => 'Seleccione un Título de Bosquejo',
+    'no_speakers_for_selected_talk' => 'No hay oradores disponibles para el título de bosquejo seleccionado',
+
 ];

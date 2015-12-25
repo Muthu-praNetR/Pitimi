@@ -27,8 +27,12 @@
             <li>
                 <div class="day {{ $item['in_month'] ? 'in-month' : 'not-in-month' }} {{ $item['is_meeting'] ? 'is-meeting' : 'is-not-meeting' }} {{ $item['is_today'] ? 'is-today' : 'is-not-today' }}">
                     <span class="date">{{ $item['date']->day }}</span>
-                    <a href="{{ route('new-schedule', ['year'=>$item['date']->year, 'month'=>$item['date']->month, 'day'=>$item['date']->day])  }}"
-                       class="btn btn-default btn-xs">{{ trans('messages.schedule_talk') }}</a>
+                    @if($item['scheduled_talk'])
+                        <span class="badge badge-default">#{{ $item['scheduled_talk']->preparedTalk->talk->number }}</span>
+                    @else
+                        <a href="{{ route('new-schedule', ['year'=>$item['date']->year, 'month'=>$item['date']->month, 'day'=>$item['date']->day])  }}"
+                           class="btn btn-default btn-xs">{{ trans('messages.schedule_talk') }}</a>
+                    @endif
                 </div>
             </li>
         @endforeach

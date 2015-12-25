@@ -268,10 +268,15 @@ class CongregationService implements Contracts\CongregationService
         }
         $end = $month->copy()->endOfMonth()->next($week_start_on)->subDay();
 
-        $public_meeting_day_of_week = session('congregation') ? session('congregation')->public_meeting_at->dayOfWeek : -1;
+        $congregation = session('congregation');
+        $public_meeting_day_of_week = $congregation ? $congregation->public_meeting_at->dayOfWeek : -1;
 
         // Get scheduled talks.
-        $scheduled_talks = ScheduledTalk::whereBetween('scheduled_at', [$start->endOfDay(), $end->startOfDay()])->get();
+        $scheduled_talks = ScheduledTalk::whereBetween('scheduled_at', [$start->endOfDay(), $end->startOfDay()]);
+        if ($congregation) {
+            $scheduled_talks = $scheduled_talks->inCongregation($congregation);
+        }
+        $scheduled_talks = $scheduled_talks->get();
 
         // Generate all calendar month dates.
         $calendar = [];
@@ -279,10 +284,13 @@ class CongregationService implements Contracts\CongregationService
         $date = $start->copy();
         do {
             $calendar[] = [
-                'date'       => $date,
-                'in_month'   => $date->month === $current_month,
-                'is_meeting' => $public_meeting_day_of_week === $date->dayOfWeek,
-                'is_today'   => $date->isToday(),
+                'date'           => $date,
+                'in_month'       => $date->month === $current_month,
+                'is_meeting'     => $public_meeting_day_of_week === $date->dayOfWeek,
+                'is_today'       => $date->isToday(),
+                'scheduled_talk' => $scheduled_talks->first(function ($key, $scheduled_talk) use ($date) {
+                    return $date->isSameDay($scheduled_talk->scheduled_at);
+                })
             ];
             $date = $date->copy()->addDay();
         } while (!$date->isSameDay($end));

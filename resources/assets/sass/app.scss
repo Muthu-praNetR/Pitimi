@@ -1,7 +1,9 @@
 @import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
 @import "node_modules/font-awesome/scss/font-awesome";
+@import "extra";
 @import "pages/login";
 @import "pages/calendar";
 @import "pages/new-speaker";
 @import "pages/edit-speaker";
+@import "pages/new-schedule";
 @import "components/language-switcher";

@@ -49,7 +49,13 @@ class ScheduleController extends Controller
         });
         $speakers = collect($speakers)->sort();
 
-        return view('schedules.new-schedule')->with(compact('date', 'talks', 'speakers'));
+        // Map prepared talks by speakers.
+        $prepared_talks_by_speakers = [];
+        $this->congregationService->getAllSpeakers()->each(function ($speaker) use (&$prepared_talks_by_speakers) {
+            $prepared_talks_by_speakers[$speaker->id] = $speaker->preparedTalks->pluck('talk_id')->toArray();
+        });
+
+        return view('schedules.new-schedule')->with(compact('date', 'talks', 'speakers', 'prepared_talks_by_speakers'));
     }
 
     public function postNew()
