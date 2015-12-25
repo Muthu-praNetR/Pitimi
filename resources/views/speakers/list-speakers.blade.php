@@ -18,6 +18,7 @@
                 <th>#</th>
                 <th>{{ trans('messages.first_name') }}</th>
                 <th>{{ trans('messages.last_name') }}</th>
+                <th>{{ trans('messages.email') }}</th>
                 <th>{{ trans('messages.congregation') }}</th>
                 <th>{{ trans('messages.prepared_talks') }}</th>
                 <th></th>
@@ -29,6 +30,7 @@
                     <td>{{ $speaker->id }}</td>
                     <td>{{ $speaker->first_name }}</td>
                     <td>{{ $speaker->last_name }}</td>
+                    <td><a href="mailto:{{ $speaker->email }}">{{ $speaker->email }}</a></td>
                     <td>{{ $speaker->congregation->name }}</td>
                     <td>{{ $speaker->preparedTalks()->count() }}</td>
                     <td>

@@ -9,7 +9,7 @@ use App\User;
 use Illuminate\Database\Seeder;
 
 /**
- * Class FixtureSeeder
+ * The FixtureSeeder class.
  * @author Rubens Mariuzzo <rubens@mariuzzo.com>
  */
 class FixtureSeeder extends Seeder

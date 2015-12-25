@@ -73,15 +73,19 @@ class SpeakerController extends Controller
         // Get input data.
         $first_name = $request->input('first_name');
         $last_name = $request->input('last_name');
+        $email = $request->input('email');
         $talk_ids = $request->input('talk_ids');
 
         // Create new speaker.
         $speaker = new Speaker();
         $speaker->first_name = $first_name;
         $speaker->last_name = $last_name;
+        $speaker->email = $email;
 
         if (Auth::user()->is_admin) {
             $speaker->congregation_id = $request->input('congregation_id');
+        } else {
+            $speaker->congregation_id = session('congregation')->id;
         }
 
         $speaker = $this->congregationService->createSpeaker($speaker);
@@ -130,6 +134,8 @@ class SpeakerController extends Controller
 
         if (Auth::user()->is_admin) {
             $speaker->congregation_id = $request->input('congregation_id');
+        } else {
+            $speaker->congregation_id = session('congregation')->id;
         }
 
         $this->congregationService->updateSpeaker($speaker);

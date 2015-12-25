@@ -18,6 +18,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\Speaker     $speaker
  * @property-read \App\User        $createdBy
  * @property-read \App\User        $updatedBy
+ * @property integer               $talk_id
+ * @property-read \App\Talk        $talk
  */
 class PreparedTalk extends Model
 {

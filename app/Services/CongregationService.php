@@ -70,11 +70,6 @@ class CongregationService implements Contracts\CongregationService
     public function createSpeaker(Speaker $speaker)
     {
         $user = Auth::user();
-
-        if (!$user->is_admin) {
-            $speaker->congregation()->associate($user->congregations->first());
-        }
-
         $speaker->createdBy()->associate($user);
         $speaker->updatedBy()->associate($user);
         $speaker->save();
@@ -123,6 +118,7 @@ class CongregationService implements Contracts\CongregationService
         $original = Speaker::findOrFail($speaker->id);
         $original->first_name = $speaker->first_name;
         $original->last_name = $speaker->last_name;
+        $original->congregation_id = $speaker->congregation_id;
         $original->updatedBy()->associate(Auth::user());
         $original->save();
     }
@@ -262,32 +258,34 @@ class CongregationService implements Contracts\CongregationService
      */
     public function getCalendar(Carbon $month)
     {
-        $month = $month->copy();
-        $month->startOfMonth();
-        $current = $month->copy();
-
-        // Set first day of week.
+        $current_month = $month->month;
         $week_start_on = Carbon::MONDAY;
-        if ($month->dayOfWeek != $week_start_on) {
-            $month->previous($week_start_on);
+
+        // Get start and end of calendar month.
+        $start = $month->copy()->startOfMonth();
+        if ($start->dayOfWeek != $week_start_on) {
+            $start->previous($week_start_on);
         }
+        $end = $month->copy()->endOfMonth()->next($week_start_on)->subDay();
 
         $public_meeting_day_of_week = session('congregation') ? session('congregation')->public_meeting_at->dayOfWeek : -1;
 
+        // Get scheduled talks.
+        $scheduled_talks = ScheduledTalk::whereBetween('scheduled_at', [$start->endOfDay(), $end->startOfDay()])->get();
+
         // Generate all calendar month dates.
         $calendar = [];
-        $date = $month->copy();
+        $end->addDay();
+        $date = $start->copy();
         do {
-            for ($i = 0; $i < 7; ++$i) {
-                $calendar[] = [
-                    'date'       => $date,
-                    'in_month'   => $date->month === $current->month,
-                    'is_meeting' => $public_meeting_day_of_week === $date->dayOfWeek,
-                    'is_today'   => $date->isToday(),
-                ];
-                $date = $date->copy()->addDay();
-            }
-        } while ($date->month == $current->month);
+            $calendar[] = [
+                'date'       => $date,
+                'in_month'   => $date->month === $current_month,
+                'is_meeting' => $public_meeting_day_of_week === $date->dayOfWeek,
+                'is_today'   => $date->isToday(),
+            ];
+            $date = $date->copy()->addDay();
+        } while (!$date->isSameDay($end));
 
         return $calendar;
     }

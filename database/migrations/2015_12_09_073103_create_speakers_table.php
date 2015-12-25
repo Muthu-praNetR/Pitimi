@@ -4,7 +4,6 @@ use Illuminate\Database\Schema\Blueprint;
 
 /**
  * The CreateSpeakersTable class.
- *
  * @author Rubens Mariuzzo <rubens@mariuzzo.com>
  */
 class CreateSpeakersTable extends BaseMigration
@@ -18,6 +17,7 @@ class CreateSpeakersTable extends BaseMigration
             $table->increments('id');
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('email')->unique();
             $table->integer('congregation_id')->unsigned();
             $table->foreign('congregation_id')->references('id')->on('congregations');
             $this->common($table);
