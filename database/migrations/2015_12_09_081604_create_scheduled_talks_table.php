@@ -18,8 +18,6 @@ class CreateScheduledTalksTable extends BaseMigration
             $table->increments('id');
             $table->integer('congregation_id')->unsigned();
             $table->foreign('congregation_id')->references('id')->on('congregations');
-            $table->integer('speaker_id')->unsigned();
-            $table->foreign('speaker_id')->references('id')->on('speakers');
             $table->integer('prepared_talk_id')->unsigned();
             $table->foreign('prepared_talk_id')->references('id')->on('prepared_talks');
             $table->datetime('scheduled_at');

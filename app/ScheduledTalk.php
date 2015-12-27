@@ -10,7 +10,6 @@ use Illuminate\Database\Eloquent\Model;
  * @author Rubens Mariuzzo <rubens@mariuzzo.com>
  * @property integer                $id
  * @property integer                $congregation_id
- * @property integer                $speaker_id
  * @property integer                $prepared_talk_id
  * @property string                 $scheduled_at
  * @property \Carbon\Carbon         $created_at
@@ -18,10 +17,10 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer                $created_by
  * @property integer                $updated_by
  * @property-read \App\Congregation $congregation
- * @property-read \App\Speaker      $speaker
  * @property-read \App\PreparedTalk $preparedTalk
  * @property-read \App\User         $createdBy
  * @property-read \App\User         $updatedBy
+ * @method static \Illuminate\Database\Query\Builder|\App\ScheduledTalk inCongregation($congregation)
  */
 class ScheduledTalk extends Model
 {
@@ -43,11 +42,6 @@ class ScheduledTalk extends Model
     public function congregation()
     {
         return $this->belongsTo('App\Congregation');
-    }
-
-    public function speaker()
-    {
-        return $this->belongsTo('App\Speaker');
     }
 
     public function preparedTalk()

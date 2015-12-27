@@ -65,7 +65,6 @@ class FixtureSeeder extends Seeder
             foreach ($prepared_talks as $prepared_talk) {
                 $scheduled_talk = new ScheduledTalk();
                 $scheduled_talk->preparedTalk()->associate($prepared_talk);
-                $scheduled_talk->speaker()->associate($prepared_talk->speaker);
                 $scheduled_talk->scheduled_at = $date;
                 $scheduled_talk->createdBy()->associate($admin);
                 $scheduled_talk->updatedBy()->associate($admin);

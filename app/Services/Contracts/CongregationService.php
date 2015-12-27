@@ -94,13 +94,13 @@ interface CongregationService
     /**
      * Schedule a talk.
      *
-     * @param TalkSubject $talk_subject The talk subject.
-     * @param Speaker     $speaker      The speaker.
-     * @param DateTime    $date         The date and time.
+     * @param integer  $talk_id    The id of the talk.
+     * @param integer  $speaker_id The id of the speaker.
+     * @param DateTime $date       The date and time.
      *
      * @return ScheduledTalk The scheduled talk.
      */
-    public function scheduleTalk(TalkSubject $talk_subject, Speaker $speaker, DateTime $date);
+    public function scheduleTalk($talk_id, $speaker_id, DateTime $date);
 
     /**
      * Unschedule a talk.

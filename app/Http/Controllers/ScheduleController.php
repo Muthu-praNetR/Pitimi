@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests;
 use App\Services\Contracts\CongregationService;
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 /**
  * The ScheduleController class.
@@ -58,9 +59,16 @@ class ScheduleController extends Controller
         return view('schedules.new-schedule')->with(compact('date', 'talks', 'speakers', 'prepared_talks_by_speakers'));
     }
 
-    public function postNew()
+    public function postNew(Request $request)
     {
-        // TODO Implement me!
+        // Get input data.
+        $talk_id = $request->input('talk_id');
+        $speaker_id = $request->input('speaker_id');
+        $scheduled_at = Carbon::parse($request->input('scheduled_at'));
+
+        $scheduled_talk = $this->congregationService->scheduleTalk($talk_id, $speaker_id, $scheduled_at);
+
+        return redirect()->route('calendar');
     }
 
 }

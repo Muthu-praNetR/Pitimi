@@ -159,15 +159,31 @@ class CongregationService implements Contracts\CongregationService
     /**
      * Schedule a talk.
      *
-     * @param TalkSubject $talk_subject The talk subject.
-     * @param Speaker     $speaker      The speaker.
-     * @param DateTime    $date         The date and time.
+     * @param integer  $talk_id    The id of the talk.
+     * @param integer  $speaker_id The id of the speaker.
+     * @param DateTime $date       The date and time.
      *
      * @return ScheduledTalk The scheduled talk.
      */
-    public function scheduleTalk(TalkSubject $talk_subject, Speaker $speaker, DateTime $date)
+    public function scheduleTalk($talk_id, $speaker_id, DateTime $date)
     {
-        // TODO Implement me.
+        $user = Auth::user();
+        $congregation = session('congregation');
+
+        $prepared_talk = PreparedTalk::where('talk_id', $talk_id)
+            ->where('speaker_id', $speaker_id)
+            ->first();
+
+        $scheduled_talk = new ScheduledTalk();
+        $scheduled_talk->congregation()->associate($congregation);
+        $scheduled_talk->preparedTalk()->associate($prepared_talk);
+        $scheduled_talk->scheduled_at = $date;
+        $scheduled_talk->createdBy()->associate($user);
+        $scheduled_talk->updatedBy()->associate($user);
+
+        $scheduled_talk->save();
+
+        return $scheduled_talk;
     }
 
     /**

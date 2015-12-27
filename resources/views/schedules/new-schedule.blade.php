@@ -28,7 +28,7 @@
             <label for="speaker_id">{{ trans('messages.available_speakers') }}</label>
             <select name="speaker_id" id="speaker_id" class="form-control"
                     ng-model="ctrl.speakerId"
-                    ng-options="speaker.name for speaker in ctrl.speakers"
+                    ng-options="speaker as speaker.name for speaker in ctrl.speakers track by speaker.id"
                     ng-disabled="ctrl.speakers.length === 0"
                     ng-change="ctrl.speakerChanged()"></select>
             <div class="alert alert-warning" ng-if="ctrl.speakers.length === 0">
@@ -41,7 +41,8 @@
             {!! Form::date('scheduled_at', $date->toDateString(), ['class' => 'form-control']) !!}
         </div>
         <a href="{{ route('calendar') }}" class="btn btn-default">{{ trans('messages.cancel') }}</a>
-        <button class="btn btn-primary" ng-disabled="ctrl.step < 3">{{ trans('messages.save') }}</button>
+        <button class="btn btn-primary" type="submit"
+                ng-disabled="ctrl.step < 3">{{ trans('messages.save') }}</button>
         {!! Form::close() !!}
     </div>
 @endsection
@@ -75,6 +76,7 @@
                         }
                     });
                     $this.step = 2;
+                    console.log($this.speakers);
                 } else {
                     $this.step = 1;
                 }
