@@ -56,8 +56,8 @@ class CongregationService implements Contracts\CongregationService
     public function logout()
     {
         Log::debug('logout');
-
         Auth::logout();
+        session_unset();
     }
 
     /**
@@ -284,8 +284,12 @@ class CongregationService implements Contracts\CongregationService
         }
         $end = $month->copy()->endOfMonth()->next($week_start_on)->subDay();
 
+        // Get public meeting date for selected congregation.
         $congregation = session('congregation');
-        $public_meeting_day_of_week = $congregation ? $congregation->public_meeting_at->dayOfWeek : -1;
+        $public_meeting_day_of_week = -1;
+        if ($congregation) {
+            $public_meeting_day_of_week = $congregation->public_meeting_at->dayOfWeek;
+        }
 
         // Get scheduled talks.
         $scheduled_talks = ScheduledTalk::whereBetween('scheduled_at', [$start->endOfDay(), $end->startOfDay()]);

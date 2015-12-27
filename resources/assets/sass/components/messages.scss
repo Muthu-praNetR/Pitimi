@@ -1,0 +1,10 @@
+/**
+ * Messages component.
+ *
+ * @author Rubens Mariuzzo <rubens@mariuzzo.com>
+ */
+div.messages {
+  > ul {
+    list-style-type: none;
+  }
+}

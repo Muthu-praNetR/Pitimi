@@ -7947,4 +7947,12 @@ ul.language-switcher {
   text-align: right;
   margin-top: 30px; }
 
+/**
+ * Messages component.
+ *
+ * @author Rubens Mariuzzo <rubens@mariuzzo.com>
+ */
+div.messages > ul {
+  list-style-type: none; }
+
 /*# sourceMappingURL=app.css.map */

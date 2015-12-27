@@ -11,6 +11,8 @@ return [
     'email'    => 'Email',
     'password' => 'Password',
 
+    'invalid_credentials' => 'Invalid credentials',
+
     'speakers'      => 'Speakers',
     'talks'         => 'Talks',
     'congregations' => 'Congregations',

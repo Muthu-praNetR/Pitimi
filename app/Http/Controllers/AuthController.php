@@ -8,14 +8,13 @@ use Illuminate\Http\Response;
 
 /**
  * The AuthController class.
- *
- * @author Rubens Mariuzzo <rubens@mariuzzo.com>
+ * @package App\Http\Controllers
+ * @author  Rubens Mariuzzo <rubens@mariuzzo.com>
  */
 class AuthController extends Controller
 {
     /**
      * The congregation service.
-     *
      * @var CongregationService
      */
     protected $congregationService;
@@ -36,8 +35,7 @@ class AuthController extends Controller
 
     /**
      * View the login form.
-     *
-     * @return View
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
     public function loginForm()
     {
@@ -60,12 +58,13 @@ class AuthController extends Controller
             return redirect('/');
         }
 
+        $this->danger(trans('messages.invalid_credentials'));
+
         return redirect('/login');
     }
 
     /**
      * Logout the user.
-     *
      * @return Response A response.
      */
     public function logout()

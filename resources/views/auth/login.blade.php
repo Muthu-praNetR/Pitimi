@@ -10,6 +10,7 @@
                 <div class="panel-body">
                     <h1>{{ trans('messages.app_name') }}</h1>
                     <h4>{{ trans('messages.app_description')  }}</h4>
+                    @include('partials.messages')
                     <hr>
                     {!! Form::open() !!}
                     {{ csrf_field() }}
