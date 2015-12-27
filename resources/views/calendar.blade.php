@@ -29,7 +29,7 @@
                     <span class="date">{{ $item['date']->day }}</span>
                     @if($item['scheduled_talk'])
                         <span class="badge badge-default">#{{ $item['scheduled_talk']->preparedTalk->talk->number }}</span>
-                    @else
+                    @elseif($item['is_meeting'])
                         <a href="{{ route('new-schedule', ['year'=>$item['date']->year, 'month'=>$item['date']->month, 'day'=>$item['date']->day])  }}"
                            class="btn btn-default btn-xs">{{ trans('messages.schedule_talk') }}</a>
                     @endif
