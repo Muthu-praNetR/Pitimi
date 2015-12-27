@@ -38,10 +38,10 @@ class CongregationService implements Contracts\CongregationService
             Log::debug('Authentication successful.', compact('email'));
 
             // Select congregation.
-            if (!$user->is_admin) {
-                session(['congregation' => $user->congregations()->first()]);
-            } else {
+            if ($user->is_admin) {
                 session(['congregation' => null]);
+            } else {
+                session(['congregation' => $user->congregations()->first()]);
             }
         } else {
             Log::debug('Authentication failed.', compact('email'));
