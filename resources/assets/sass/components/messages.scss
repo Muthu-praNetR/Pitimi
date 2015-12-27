@@ -4,6 +4,9 @@
  * @author Rubens Mariuzzo <rubens@mariuzzo.com>
  */
 div.messages {
+  @extend .animated;
+  @extend .bounceIn;
+
   > ul {
     list-style-type: none;
   }

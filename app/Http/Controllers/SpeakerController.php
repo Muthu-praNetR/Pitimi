@@ -93,6 +93,8 @@ class SpeakerController extends Controller
         // Add prepared talks.
         $this->congregationService->addPreparedTalks($speaker, $talk_ids);
 
+        $this->success(trans('messages.speaker_created_successfully', ['name' => $speaker->fullName]));
+
         return redirect()->route('list-speakers');
     }
 

@@ -16,6 +16,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property \Carbon\Carbon                                                     $updated_at
  * @property integer                                                            $created_by
  * @property integer                                                            $updated_by
+ * @property string                                                             $fullName
  * @property-read \App\Congregation                                             $congregation
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\ScheduledTalk[] $scheduledTalks
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\PreparedTalk[]  $preparedTalks
@@ -24,6 +25,11 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Speaker extends Model
 {
+    public function getFullNameAttribute()
+    {
+        return $this->first_name . ' ' . $this->last_name;
+    }
+
     // Relationships.
 
     public function congregation()

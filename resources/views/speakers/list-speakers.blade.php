@@ -8,6 +8,7 @@
         <i class="fa fa-user"></i>
         {{ trans('messages.speakers') }}
     </h2>
+    @include('partials.messages')
     @if($speakers->count() > 0)
         <a href="{{ route('new-speaker') }}"
            class="btn btn-primary pull-right">{{ trans('messages.create_new_speaker') }}</a>
