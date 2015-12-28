@@ -106,17 +106,7 @@ class AdminService implements Contracts\AdminService
     public function getTalks($page_size = 10)
     {
         $user = Auth::user();
-        $talks = Talk::with(['titles' => function ($query) use ($user) {
-            $query->where('locale_id', $user->locale_id);
-        }])->paginate($page_size);
-
-        foreach ($talks as $talk) {
-            $talk->titles = $talk->titles->reject(function ($title) use ($user) {
-                return $title->locale_id !== $user->locale_id;
-            });
-        }
-
-        return $talks;
+        return Talk::translateTo($user->locale)->paginate($page_size);
     }
 
     /**

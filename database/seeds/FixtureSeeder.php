@@ -28,8 +28,8 @@ class FixtureSeeder extends Seeder
         $circuits = factory(Circuit::class, 5)->make();
         foreach ($circuits as $index => $circuit) {
             $circuit->number = $index + 1;
-            $circuit->createdBy->associate($admin);
-            $circuit->updatedBy->associate($admin);
+            $circuit->createdBy()->associate($admin);
+            $circuit->updatedBy()->associate($admin);
             $circuit->save();
 
             // Create some congregations.

@@ -13,7 +13,6 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 
 /**
  * App\User
- *
  * @property integer                                                           $id
  * @property string                                                            $first_name
  * @property string                                                            $last_name
@@ -36,7 +35,7 @@ class User extends Model implements AuthenticatableContract,
     AuthorizableContract,
     CanResetPasswordContract
 {
-    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes;
+    use Authenticatable, Authorizable, CanResetPassword, SoftDeletes, InCircuit, InCongregation;
 
     /**
      * The database table used by the model.

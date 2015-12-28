@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * The Congregation class represents the venue to present a talk.
- *
  * @author Rubens Mariuzzo <rubens@mariuzzo.com>
  * @property integer                                                            $id
  * @property string                                                             $name
@@ -22,10 +21,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\User                                                     $createdBy
  * @property-read \App\User                                                     $updatedBy
  * @property integer                                                            $circuit_id
- * @property-read \App\Circuit $circuit
+ * @property-read \App\Circuit                                                  $circuit
  */
 class Congregation extends Model
 {
+    use InCircuit;
+
     /**
      * The attributes that should be mutated to dates.
      * @var array

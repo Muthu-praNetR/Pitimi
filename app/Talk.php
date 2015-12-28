@@ -2,7 +2,6 @@
 
 namespace App;
 
-use Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
@@ -24,9 +23,11 @@ class Talk extends Model
 {
     // Scopes.
 
-    public function scopeTranslateTitle(Builder $query)
+    public function scopeTranslateTo(Builder $query, Locale $locale)
     {
-        $query->where('locale_id', Auth::user()->locale_id);
+        $query->with(['titles' => function ($query) use ($locale) {
+            $query->where('locale_id', $locale->id);
+        }]);
     }
 
     // Relationships.
@@ -65,5 +66,12 @@ class Talk extends Model
     public function updatedBy()
     {
         return $this->belongsTo('App\User', 'updated_by');
+    }
+
+    // Accessor.
+
+    public function getTitleAttribute()
+    {
+        return $this->titles->first()->title;
     }
 }

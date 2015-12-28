@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * The Speaker class represents who present a talk.
- *
  * @author Rubens Mariuzzo <rubens@mariuzzo.com>
  * @property integer                                                            $id
  * @property string                                                             $first_name
@@ -25,10 +24,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\User                                                     $updatedBy
  * @property integer                                                            $circuit_id
  * @property-read mixed                                                         $full_name
- * @property-read \App\Circuit $circuit
+ * @property-read \App\Circuit                                                  $circuit
  */
 class Speaker extends Model
 {
+    use InCongregation, InCircuit;
+
     public function getFullNameAttribute()
     {
         return $this->first_name . ' ' . $this->last_name;

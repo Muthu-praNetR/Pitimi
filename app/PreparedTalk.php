@@ -23,6 +23,8 @@ use Illuminate\Database\Eloquent\Model;
  */
 class PreparedTalk extends Model
 {
+    use InCongregation, InCircuit;
+
     // Relationships.
 
     /**

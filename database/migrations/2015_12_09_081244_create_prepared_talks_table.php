@@ -17,8 +17,10 @@ class CreatePreparedTalksTable extends BaseMigration
             $table->increments('id');
             $table->integer('speaker_id')->unsigned();
             $table->integer('talk_id')->unsigned();
+            $table->integer('congregation_id')->unsigned();
             $table->foreign('speaker_id')->references('id')->on('speakers');
             $table->foreign('talk_id')->references('id')->on('talks');
+            $table->foreign('congregation_id')->references('id')->on('congregations');
             $this->common($table);
         });
     }

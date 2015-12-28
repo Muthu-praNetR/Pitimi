@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\Contracts\CongregationService;
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
@@ -39,6 +40,9 @@ class AuthController extends Controller
      */
     public function loginForm()
     {
+        if (Auth::check()) {
+            return redirect()->route('calendar');
+        }
         return view('auth.login');
     }
 

@@ -24,8 +24,8 @@
                 <tr>
                     <td>{{ $talk->number }}</td>
                     <td>
-                        @if ($talk->subjects->count() > 0)
-                            {{ $talk->subjects->first()->subject }}
+                        @if ($talk->titles->count() > 0)
+                            {{ $talk->title }}
                         @else
                             <small class="text-muted"><i
                                         class="fa fa-exclamation-triangle"></i> {{ trans('messages.not_defined') }}

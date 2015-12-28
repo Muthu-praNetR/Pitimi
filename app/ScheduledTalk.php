@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * The ScheduledTalk class.
- *
  * @author Rubens Mariuzzo <rubens@mariuzzo.com>
  * @property integer                $id
  * @property integer                $congregation_id
@@ -23,10 +22,12 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\User         $updatedBy
  * @method static \Illuminate\Database\Query\Builder|\App\ScheduledTalk inCongregation($congregation)
  * @property integer                $circuit_id
- * @property-read \App\Circuit $circuit
+ * @property-read \App\Circuit      $circuit
  */
 class ScheduledTalk extends Model
 {
+    use InCongregation, InCircuit;
+
     /**
      * The attributes that should be mutated to dates.
      * @var array
