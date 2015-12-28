@@ -4,7 +4,7 @@ namespace App\Services\Contracts;
 
 use App\Congregation;
 use App\Talk;
-use App\TalkSubject;
+use App\TalkTitle;
 use App\User;
 
 /**
@@ -100,47 +100,47 @@ interface AdminService
     public function deleteTalk(Talk $talk);
 
     /**
-     * Create a talk subject.
+     * Create a talk title.
      *
-     * @param TalkSubject $talk_subject The talk subject.
+     * @param TalkTitle $talk_title The talk title.
      *
-     * @return TalkSubject The created talk subject.
+     * @return TalkTitle The created talk title.
      */
-    public function createTalkSubject(TalkSubject $talk_subject);
+    public function createTalkTitle(TalkTitle $talk_title);
 
     /**
-     * Get a talk subject by id.
+     * Get a talk title by id.
      *
-     * @param number $id The id of the talk subject.
+     * @param number $id The id of the talk title.
      *
-     * @return TalkSubject The talk subject.
+     * @return TalkTitle The talk title.
      */
-    public function getTalkSubject($id);
+    public function getTalkTitle($id);
 
     /**
-     * Get talk subjects.
+     * Get talk titles.
      *
      * @param number $page_size The page size.
      *
      * @return array [description]
      */
-    public function getTalkSubjects($page_size);
+    public function getTalkTitles($page_size);
 
     /**
-     * Update talk subject.
+     * Update talk title.
      *
-     * @param TalkSubject $talk_subject The talk subject.
+     * @param TalkTitle $talk_title The talk title.
      *
-     * @return TalkSubject The updated talk subject.
+     * @return TalkTitle The updated talk title.
      */
-    public function updateTalkSubject(TalkSubject $talk_subject);
+    public function updateTalkTitle(TalkTitle $talk_title);
 
     /**
-     * Delete a talk subject.
+     * Delete a talk title.
      *
-     * @param TalkSubject $talk_subject The talk subject.
+     * @param TalkTitle $talk_title The talk title.
      */
-    public function deleteTalkSubject(TalkSubject $talk_subject);
+    public function deleteTalkTitle(TalkTitle $talk_title);
 
     /**
      * Get all congregations.

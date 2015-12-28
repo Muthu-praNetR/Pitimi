@@ -8,7 +8,12 @@ use Illuminate\Database\Schema\Blueprint;
  */
 class CreateCircuitsTable extends BaseMigration
 {
-    protected $tenanted_tables = ['congregations', 'speakers', 'prepared_talks', 'scheduled_talks'];
+    protected $tenanted_tables = [
+        'congregations',
+        'speakers',
+        'prepared_talks',
+        'scheduled_talks'
+    ];
 
     /**
      * Run the migrations.
@@ -28,6 +33,11 @@ class CreateCircuitsTable extends BaseMigration
                 $table->foreign('circuit_id')->references('id')->on('circuits');
             });
         }
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->integer('circuit_id')->unsigned()->nullable();
+            $table->foreign('circuit_id')->references('id')->on('circuits');
+        });
     }
 
     /**
@@ -41,6 +51,10 @@ class CreateCircuitsTable extends BaseMigration
                 $table->dropForeign($table_name . '_circuit_id_foreign');
             });
         }
+
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropForeign('users_circuit_id_foreign');
+        });
 
         Schema::drop('circuits');
     }

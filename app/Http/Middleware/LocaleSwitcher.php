@@ -38,6 +38,7 @@ class LocaleSwitcher
                     $user = Auth::user();
                     $user->locale()->associate($locale);
                     $user->save();
+                    Auth::setUser($user);
                 }
             }
 

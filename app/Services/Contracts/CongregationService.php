@@ -5,7 +5,7 @@ namespace App\Services\Contracts;
 use App\PreparedTalk;
 use App\ScheduledTalk;
 use App\Speaker;
-use App\TalkSubject;
+use App\TalkTitle;
 use Carbon\Carbon;
 use DateTime;
 use Illuminate\Support\Collection;
@@ -77,12 +77,12 @@ interface CongregationService
     /**
      * Create a prepared talk.
      *
-     * @param TalkSubject $talk_subject The talk subject.
-     * @param Speaker     $speaker      The speaker.
+     * @param TalkTitle $talk_title The talk title.
+     * @param Speaker   $speaker    The speaker.
      *
      * @return PreparedTalk The created prepared talk.
      */
-    public function createPreparedTalk(TalkSubject $talk_subject, Speaker $speaker);
+    public function createPreparedTalk(TalkTitle $talk_title, Speaker $speaker);
 
     /**
      * Delete a prepared talk.

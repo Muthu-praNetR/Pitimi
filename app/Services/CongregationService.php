@@ -6,7 +6,7 @@ use App\PreparedTalk;
 use App\ScheduledTalk;
 use App\Speaker;
 use App\Talk;
-use App\TalkSubject;
+use App\TalkTitle;
 use Auth;
 use Carbon\Carbon;
 use DateTime;
@@ -131,12 +131,12 @@ class CongregationService implements Contracts\CongregationService
     /**
      * Create a prepared talk.
      *
-     * @param TalkSubject $talk_subject The talk subject.
-     * @param Speaker     $speaker      The speaker.
+     * @param TalkTitle $talk_title The talk title.
+     * @param Speaker   $speaker    The speaker.
      *
      * @return PreparedTalk The created prepared talk.
      */
-    public function createPreparedTalk(TalkSubject $talk_subject, Speaker $speaker)
+    public function createPreparedTalk(TalkTitle $talk_title, Speaker $speaker)
     {
         // TODO Implement me.
     }
@@ -210,13 +210,13 @@ class CongregationService implements Contracts\CongregationService
     public function getAllTalks()
     {
         $user = Auth::user();
-        $talks = Talk::with(['subjects' => function ($query) use ($user) {
+        $talks = Talk::with(['titles' => function ($query) use ($user) {
             $query->where('locale_id', $user->locale_id);
         }])->get();
 
         foreach ($talks as $talk) {
-            $talk->subjects = $talk->subjects->reject(function ($subject) use ($user) {
-                return $subject->locale_id !== $user->locale_id;
+            $talk->titles = $talk->titles->reject(function ($title) use ($user) {
+                return $title->locale_id !== $user->locale_id;
             });
         }
 

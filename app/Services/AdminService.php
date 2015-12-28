@@ -4,7 +4,7 @@ namespace App\Services;
 
 use App\Congregation;
 use App\Talk;
-use App\TalkSubject;
+use App\TalkTitle;
 use App\User;
 use Auth;
 
@@ -106,13 +106,13 @@ class AdminService implements Contracts\AdminService
     public function getTalks($page_size = 10)
     {
         $user = Auth::user();
-        $talks = Talk::with(['subjects' => function ($query) use ($user) {
+        $talks = Talk::with(['titles' => function ($query) use ($user) {
             $query->where('locale_id', $user->locale_id);
         }])->paginate($page_size);
 
         foreach ($talks as $talk) {
-            $talk->subjects = $talk->subjects->reject(function ($subject) use ($user) {
-                return $subject->locale_id !== $user->locale_id;
+            $talk->titles = $talk->titles->reject(function ($title) use ($user) {
+                return $title->locale_id !== $user->locale_id;
             });
         }
 
@@ -142,59 +142,59 @@ class AdminService implements Contracts\AdminService
     }
 
     /**
-     * Create a talk subject.
+     * Create a talk title.
      *
-     * @param TalkSubject $talk_subject The talk subject.
+     * @param TalkTitle $talk_title The talk title.
      *
-     * @return TalkSubject The created talk subject.
+     * @return TalkTitle The created talk title.
      */
-    public function createTalkSubject(TalkSubject $talk_subject)
+    public function createTalkTitle(TalkTitle $talk_title)
     {
         // TODO Implement me.
     }
 
     /**
-     * Get a talk subject by id.
+     * Get a talk title by id.
      *
-     * @param number $id The id of the talk subject.
+     * @param number $id The id of the talk title.
      *
-     * @return TalkSubject The talk subject.
+     * @return TalkTitle The talk title.
      */
-    public function getTalkSubject($id)
+    public function getTalkTitle($id)
     {
         // TODO Implement me.
     }
 
     /**
-     * Get talk subjects.
+     * Get talk titles.
      *
      * @param number $page_size The page size.
      *
      * @return array [description]
      */
-    public function getTalkSubjects($page_size)
+    public function getTalkTitles($page_size)
     {
         // TODO Implement me.
     }
 
     /**
-     * Update talk subject.
+     * Update talk title.
      *
-     * @param TalkSubject $talk_subject The talk subject.
+     * @param TalkTitle $talk_title The talk title.
      *
-     * @return TalkSubject The updated talk subject.
+     * @return TalkTitle The updated talk title.
      */
-    public function updateTalkSubject(TalkSubject $talk_subject)
+    public function updateTalkTitle(TalkTitle $talk_title)
     {
         // TODO Implement me.
     }
 
     /**
-     * Delete a talk subject.
+     * Delete a talk title.
      *
-     * @param TalkSubject $talk_subject The talk subject.
+     * @param TalkTitle $talk_title The talk title.
      */
-    public function deleteTalkSubject(TalkSubject $talk_subject)
+    public function deleteTalkTitle(TalkTitle $talk_title)
     {
         // TODO Implement me.
     }

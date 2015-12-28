@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * The Speaker class represents who present a talk.
+ *
  * @author Rubens Mariuzzo <rubens@mariuzzo.com>
  * @property integer                                                            $id
  * @property string                                                             $first_name
@@ -22,6 +23,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\PreparedTalk[]  $preparedTalks
  * @property-read \App\User                                                     $createdBy
  * @property-read \App\User                                                     $updatedBy
+ * @property integer                                                            $circuit_id
+ * @property-read mixed                                                         $full_name
+ * @property-read \App\Circuit $circuit
  */
 class Speaker extends Model
 {
@@ -31,6 +35,15 @@ class Speaker extends Model
     }
 
     // Relationships.
+
+    /**
+     * The circuit where the speaker belongs to.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function circuit()
+    {
+        return $this->belongsTo('App\Circuit');
+    }
 
     public function congregation()
     {

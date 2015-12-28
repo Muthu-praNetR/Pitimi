@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * The ScheduledTalk class.
+ *
  * @author Rubens Mariuzzo <rubens@mariuzzo.com>
  * @property integer                $id
  * @property integer                $congregation_id
@@ -21,6 +22,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\User         $createdBy
  * @property-read \App\User         $updatedBy
  * @method static \Illuminate\Database\Query\Builder|\App\ScheduledTalk inCongregation($congregation)
+ * @property integer                $circuit_id
+ * @property-read \App\Circuit $circuit
  */
 class ScheduledTalk extends Model
 {
@@ -38,6 +41,15 @@ class ScheduledTalk extends Model
     }
 
     // Relationships.
+
+    /**
+     * The circuit where the scheduled talk belongs to.
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function circuit()
+    {
+        return $this->belongsTo('App\Circuit');
+    }
 
     public function congregation()
     {

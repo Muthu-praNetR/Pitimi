@@ -13,6 +13,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 
 /**
  * App\User
+ *
  * @property integer                                                           $id
  * @property string                                                            $first_name
  * @property string                                                            $last_name

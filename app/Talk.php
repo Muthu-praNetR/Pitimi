@@ -2,6 +2,8 @@
 
 namespace App;
 
+use Auth;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -15,20 +17,27 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer                                                           $updated_by
  * @property-read \App\User                                                    $createdBy
  * @property-read \App\User                                                    $updatedBy
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\TalkSubject[]  $subjects
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\TalkTitle[]    $titles
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\PreparedTalk[] $prepared
  */
 class Talk extends Model
 {
+    // Scopes.
+
+    public function scopeTranslateTitle(Builder $query)
+    {
+        $query->where('locale_id', Auth::user()->locale_id);
+    }
+
     // Relationships.
 
     /**
-     * Get all subjects.
+     * Get all titles.
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
-    public function subjects()
+    public function titles()
     {
-        return $this->hasMany('App\TalkSubject');
+        return $this->hasMany('App\TalkTitle');
     }
 
     /**

@@ -11,6 +11,12 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     ];
 });
 
+$factory->define(App\Circuit::class, function (Faker\Generator $faker) {
+    return [
+        'number' => $faker->randomDigitNotNull,
+    ];
+});
+
 $factory->define(App\Congregation::class, function (Faker\Generator $faker) {
     return [
         'name'              => $faker->city(),
@@ -42,7 +48,7 @@ $factory->define(App\Talk::class, function (Faker\Generator $faker) {
     ];
 });
 
-$factory->define(App\TalkSubject::class, function (Faker\Generator $faker) {
+$factory->define(App\TalkTitle::class, function (Faker\Generator $faker) {
     return [
         'subject' => $faker->sentence(8),
     ];

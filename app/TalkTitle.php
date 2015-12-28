@@ -5,9 +5,9 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\TalkSubject
+ * App\TalkTitle
  * @property integer          $id
- * @property string           $subject
+ * @property string           $title
  * @property integer          $talk_id
  * @property integer          $locale_id
  * @property \Carbon\Carbon   $created_at
@@ -19,7 +19,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property-read \App\User   $createdBy
  * @property-read \App\User   $updatedBy
  */
-class TalkSubject extends Model
+class TalkTitle extends Model
 {
     // Relationships.
 

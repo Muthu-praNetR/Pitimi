@@ -5,42 +5,30 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * The Congregation class represents the venue to present a talk.
+ * The Circuit class.
  *
+ * @package App
  * @author Rubens Mariuzzo <rubens@mariuzzo.com>
  * @property integer                                                            $id
- * @property string                                                             $name
- * @property boolean                                                            $is_group
- * @property \Carbon\Carbon                                                     $public_meeting_at
+ * @property integer                                                            $number
  * @property \Carbon\Carbon                                                     $created_at
  * @property \Carbon\Carbon                                                     $updated_at
  * @property integer                                                            $created_by
  * @property integer                                                            $updated_by
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\Congregation[]  $congregations
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\Speaker[]       $speakers
+ * @property-read \Illuminate\Database\Eloquent\Collection|\App\PreparedTalk[]  $preparedTalks
  * @property-read \Illuminate\Database\Eloquent\Collection|\App\ScheduledTalk[] $scheduledTalks
- * @property-read \Illuminate\Database\Eloquent\Collection|\App\User[]          $users
  * @property-read \App\User                                                     $createdBy
  * @property-read \App\User                                                     $updatedBy
- * @property integer                                                            $circuit_id
- * @property-read \App\Circuit $circuit
  */
-class Congregation extends Model
+class Circuit extends Model
 {
-    /**
-     * The attributes that should be mutated to dates.
-     * @var array
-     */
-    protected $dates = ['created_at', 'updated_at', 'public_meeting_at'];
-
     // Relationships.
 
-    /**
-     * The circuit where the congregation belongs to.
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-     */
-    public function circuit()
+    public function congregations()
     {
-        return $this->belongsTo('App\Circuit');
+        return $this->hasMany('App\Congregation');
     }
 
     public function speakers()
@@ -48,14 +36,14 @@ class Congregation extends Model
         return $this->hasMany('App\Speaker');
     }
 
+    public function preparedTalks()
+    {
+        return $this->hasMany('App\PreparedTalk');
+    }
+
     public function scheduledTalks()
     {
         return $this->hasMany('App\ScheduledTalk');
-    }
-
-    public function users()
-    {
-        return $this->hasMany('App\User');
     }
 
     public function createdBy()

@@ -20,9 +20,9 @@ class CreateTalksTable extends BaseMigration
             $this->common($table);
         });
 
-        Schema::create('talk_subjects', function (Blueprint $table) {
+        Schema::create('talk_titles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('subject', 200);
+            $table->string('title', 200);
             $table->integer('talk_id')->unsigned();
             $table->foreign('talk_id')->references('id')->on('talks');
             $table->integer('locale_id')->unsigned();
@@ -37,7 +37,7 @@ class CreateTalksTable extends BaseMigration
      */
     public function down()
     {
-        Schema::drop('talk_subjects');
+        Schema::drop('talk_titles');
         Schema::drop('talks');
     }
 }
