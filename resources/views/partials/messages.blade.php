@@ -4,7 +4,7 @@
             @if(Session::get('messages')[$type])
                 <ul class="alert alert-{{ $type }}">
                     @foreach(Session::get('messages')[$type] as $message)
-                        <li>{{ $message }}.</li>
+                        <li>{{ $message }}</li>
                     @endforeach
                 </ul>
             @endif

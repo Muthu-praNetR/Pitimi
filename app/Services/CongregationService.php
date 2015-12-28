@@ -35,14 +35,9 @@ class CongregationService implements Contracts\CongregationService
         $user = Auth::user();
 
         if ($authenticated) {
+            session(['congregation' => $user->is_admin ? null : $user->congregations()->first()]);
+            session(['locale' => $user->locale]);
             Log::debug('Authentication successful.', compact('email'));
-
-            // Select congregation.
-            if ($user->is_admin) {
-                session(['congregation' => null]);
-            } else {
-                session(['congregation' => $user->congregations()->first()]);
-            }
         } else {
             Log::debug('Authentication failed.', compact('email'));
         }

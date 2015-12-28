@@ -2,11 +2,14 @@
 
 use Illuminate\Database\Schema\Blueprint;
 
+/**
+ * The CreateUsersTable class.
+ * @author Rubens Mariuzzo <rubens@mariuzzo.com>
+ */
 class CreateUsersTable extends BaseMigration
 {
     /**
      * Run the migrations.
-     *
      * @return void
      */
     public function up()
@@ -26,7 +29,6 @@ class CreateUsersTable extends BaseMigration
 
     /**
      * Reverse the migrations.
-     *
      * @return void
      */
     public function down()
