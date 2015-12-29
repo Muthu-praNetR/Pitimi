@@ -23,6 +23,12 @@ class Talk extends Model
 {
     // Scopes.
 
+    /**
+     * Scope talk titles in given locale.
+     *
+     * @param Builder $query  The query builder.
+     * @param Locale  $locale The locale.
+     */
     public function scopeTranslateTo(Builder $query, Locale $locale)
     {
         $query->with(['titles' => function ($query) use ($locale) {
@@ -70,6 +76,10 @@ class Talk extends Model
 
     // Accessor.
 
+    /**
+     * Get the first title.
+     * @return string
+     */
     public function getTitleAttribute()
     {
         return $this->titles->first()->title;
